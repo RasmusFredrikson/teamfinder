@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 public class MyProfileActivity extends AppCompatActivity {
 
-    private static final String MY_DISCOVERY_SETTINGS = "MY_DISCOVERY_SETTINGS";
+    public static final String MY_DISCOVERY_SETTINGS = "MY_DISCOVERY_SETTINGS";
     ImageView profilePicture;
     Spinner gameDropdown, positionDropdown, rankDropdown;
 
@@ -51,8 +51,11 @@ public class MyProfileActivity extends AppCompatActivity {
         // killed and restarted.
         SharedPreferences.Editor editor = getSharedPreferences(MY_DISCOVERY_SETTINGS, MODE_PRIVATE).edit();
         editor.putInt("gameIndex", gameDropdown.getSelectedItemPosition());
+        editor.putString("selectedGame", gameDropdown.getSelectedItem().toString());
         editor.putInt("positionIndex", positionDropdown.getSelectedItemPosition());
+        editor.putString("selectedPosition", positionDropdown.getSelectedItem().toString());
         editor.putInt("rankIndex", rankDropdown.getSelectedItemPosition());
+        editor.putString("selectedRank", rankDropdown.getSelectedItem().toString());
 
         editor.apply();
     }

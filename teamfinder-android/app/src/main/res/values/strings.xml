@@ -13,12 +13,14 @@
     <string name="title_dropdown_rank">Rank</string>
     <string name="title_discovery_settings">Discovery settings</string>
 
+    <string name="no_game_selected">Select game…</string>
     <string-array name="dropdown_games">
         <item>Select game…</item>
         <item>League of Legends</item>
         <item>Counter-Strike: Global Offensive</item>
     </string-array>
 
+    <string name="no_position_selected">Select position…</string>
     <string-array name="dropdown_positions">
         <item>Select position…</item>
         <item>Top</item>
@@ -28,6 +30,7 @@
         <item>Jungle</item>
     </string-array>
 
+    <string name="no_rank_selected">Select rank…</string>
     <string-array name="dropdown_ranks">
         <item>Select rank…</item>
         <item>I</item>

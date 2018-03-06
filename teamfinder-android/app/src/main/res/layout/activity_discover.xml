@@ -34,22 +34,25 @@
         android:id="@+id/playerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playerImage" />
 
     <TextView
         android:id="@+id/playerRank"
-        android:layout_width="wrap_content"
+        android:layout_width="82dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/playerName"
         app:layout_constraintTop_toBottomOf="@+id/playerName" />
 
     <TextView
@@ -66,11 +69,10 @@
         android:id="@+id/playerInfo"
         android:layout_width="325dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
         android:textSize="16sp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/playerRank"
         app:layout_constraintTop_toBottomOf="@+id/playerRank" />
 
 </android.support.constraint.ConstraintLayout>
