@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">TeamFinder</string>
+    <string name="title_discovery">Discovery</string>
+    <string name="title_profile">My Profile</string>
+    <string name="title_matches">Matches</string>
+    <string name="title_activity_discover">DiscoverActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="nickname">Muffins1337</string>
+    <string name="title_dropdown_game">Game</string>
+    <string name="title_dropdown_position">Position</string>
+    <string name="title_dropdown_rank">Rank</string>
+    <string name="title_discovery_settings">Discovery settings</string>
+
+    <string-array name="dropdown_games">
+        <item>Select game…</item>
+        <item>League of Legends</item>
+        <item>Counter-Strike: Global Offensive</item>
+    </string-array>
+
+    <string-array name="dropdown_positions">
+        <item>Select position…</item>
+        <item>Top</item>
+        <item>Mid</item>
+        <item>Support</item>
+        <item>AD-carrier</item>
+        <item>Jungle</item>
+    </string-array>
+
+    <string-array name="dropdown_ranks">
+        <item>Select rank…</item>
+        <item>I</item>
+        <item>II</item>
+        <item>III</item>
+        <item>IV</item>
+        <item>V</item>
+    </string-array>
+    <string name="title_activity_matches">MatchesActivity</string>
+    <string name="pick_image_intent_text">Select a method</string>
+</resources>
