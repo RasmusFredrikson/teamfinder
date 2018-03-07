@@ -10,30 +10,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import static com.example.rasmus.teamfinder.MyProfileActivity.MY_DISCOVERY_SETTINGS;
 
 public class DiscoverActivity extends AppCompatActivity {
-
-//    private ArrayList<HashMap<String, String>> matchedPlayers = new ArrayList<HashMap<String, String>>(){{
-//        add(new HashMap<String,String>(){{
-//            put("name","Snow1");
-//            put("position", "Top");
-//            put("rank", "I");
-//            put("info", "Hello my name is Snow.");
-//        }});
-//    }};
 
     private static final String[] playerNames = {"Snow", "Danette", "Lagging Ninja", "Parachuting Nader", "Bomber", "Gunner", "FighTer", "MeD1c", "Pwner", "Muffins"};
     private static final String[] playerRanks = {"I", "II", "III", "IV", "V"};
@@ -82,6 +68,7 @@ public class DiscoverActivity extends AppCompatActivity {
 
     public void getNewPlayer() {
         Random r = new Random();
+        Resources res = getResources();
 
         int playerIndex = r.nextInt(playerNames.length);
         playerName.setText(playerNames[playerIndex]);
@@ -93,19 +80,19 @@ public class DiscoverActivity extends AppCompatActivity {
 
         playerIndex = r.nextInt(playerPositions.length);
 
-        if (!discoverySettings.getString("selectedPosition","").equals("Select position…")) {
-            playerPosition.setText("Position: " + discoverySettings.getString("selectedPosition",null));
+        if (!discoverySettings.getString("selectedPosition","").equals(res.getString(R.string.no_position_selected))) {
+            playerPosition.setText(String.format(res.getString(R.string.position_placeholder), discoverySettings.getString("selectedPosition", null)));
         } else {
-            playerPosition.setText("Position: " + playerPositions[playerIndex]);
+            playerPosition.setText(String.format(res.getString(R.string.position_placeholder), playerPositions[playerIndex]));
         }
         selectedPosition = playerPositions[playerIndex];
 
         playerIndex = r.nextInt(playerRanks.length);
 
-        if (!discoverySettings.getString("selectedRank","").equals("Select rank…")) {
-            playerRank.setText("Rank: " + discoverySettings.getString("selectedRank",null));
+        if (!discoverySettings.getString("selectedRank","").equals(res.getString(R.string.no_rank_selected))) {
+            playerRank.setText(String.format(res.getString(R.string.rank_placeholder), discoverySettings.getString("selectedRank", null)));
         } else {
-            playerRank.setText("Rank: " + playerRanks[playerIndex]);
+            playerRank.setText(String.format(res.getString(R.string.rank_placeholder), playerRanks[playerIndex]));
         }
         selectedRank = playerRanks[playerIndex];
 
@@ -120,44 +107,18 @@ public class DiscoverActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = discoverySettings.edit();
             Gson gson = new Gson();
 
-            String json = discoverySettings.getString("matchedPlayerNames", "");
-            ArrayList<String> updatedMatchedPlayerNames;
+            String json = discoverySettings.getString("matchedPlayers", "");
+            ArrayList<Player> updatedMatchedPlayerNames;
             if (!json.equals("")) {
-                ArrayList<String> previouslyMatchedPlayerNames = gson.fromJson(json,new TypeToken<ArrayList<String>>(){}.getType());
+                ArrayList<Player> previouslyMatchedPlayerNames = gson.fromJson(json,new TypeToken<ArrayList<Player>>(){}.getType());
                 updatedMatchedPlayerNames = new ArrayList<>(previouslyMatchedPlayerNames);
             } else
                 updatedMatchedPlayerNames = new ArrayList<>();
 
-            updatedMatchedPlayerNames.add(selectedPlayer);
+            updatedMatchedPlayerNames.add(new Player(selectedPlayer,selectedPosition,selectedRank,selectedInfo,selectedImage));
+
             json = gson.toJson(updatedMatchedPlayerNames);
-            editor.putString("matchedPlayerNames", json);
-
-
-//            Set<String> previouslyMatchedPlayerPositions = discoverySettings.getStringSet("matchedPlayerPositions",new HashSet<String>());
-//            Set<String> previouslyMatchedPlayerRanks = discoverySettings.getStringSet("matchedPlayerRanks",new HashSet<String>());
-//            Set<String> previouslyMatchedPlayerInfos = discoverySettings.getStringSet("matchedPlayerInfos",new HashSet<String>());
-//            Set<String> previouslyMatchedPlayerImages = discoverySettings.getStringSet("matchedPlayerImages",new HashSet<String>());
-//
-//            Set<String> updatedMatchedPlayerNames = new HashSet<>(previouslyMatchedPlayerNames);
-//            updatedMatchedPlayerNames.add(playerName.getText().toString());
-//            editor.putStringSet("matchedPlayerNames", updatedMatchedPlayerNames);
-//
-//            Set<String> updatedMatchedPlayerPositions = new HashSet<>(previouslyMatchedPlayerPositions);
-//            updatedMatchedPlayerPositions.add(playerPosition.getText().toString());
-//            editor.putStringSet("matchedPlayerPositions", updatedMatchedPlayerPositions);
-//
-//            Set<String> updatedMatchedPlayerRanks = new HashSet<>(previouslyMatchedPlayerRanks);
-//            updatedMatchedPlayerRanks.add(playerRank.getText().toString());
-//            editor.putStringSet("matchedPlayerRanks", updatedMatchedPlayerRanks);
-//
-//            Set<String> updatedMatchedPlayerInfos = new HashSet<>(previouslyMatchedPlayerInfos);
-//            updatedMatchedPlayerInfos.add(playerInfo.getText().toString());
-//            editor.putStringSet("matchedPlayerInfos", updatedMatchedPlayerInfos);
-//
-//            Set<String> updatedMatchedPlayerImages = new HashSet<>(previouslyMatchedPlayerImages);
-//            updatedMatchedPlayerImages.add(selectedImage.toString());
-//            editor.putStringSet("matchedPlayerImages", updatedMatchedPlayerImages);
-
+            editor.putString("matchedPlayers", json);
             editor.apply();
         //}
     }
@@ -170,10 +131,10 @@ public class DiscoverActivity extends AppCompatActivity {
 
         discoverySettings = getSharedPreferences(MY_DISCOVERY_SETTINGS, MODE_PRIVATE);
 
-        playerImage = findViewById(R.id.playerImage);
+        playerImage = findViewById(R.id.playerImage1);
         playerInfo = findViewById(R.id.playerInfo);
-        playerName = findViewById(R.id.playerName);
-        playerRank = findViewById(R.id.playerRank);
+        playerName = findViewById(R.id.playerName1);
+        playerRank = findViewById(R.id.playerRank1);
         playerPosition = findViewById(R.id.playerPosition);
 
         playerImage.setOnTouchListener(new OnSwipeTouchListener(DiscoverActivity.this) {
@@ -186,8 +147,8 @@ public class DiscoverActivity extends AppCompatActivity {
             }
             @Override
             public void onSwipeLeft() {
-                getNewPlayer();
                 matchPlayer();
+                getNewPlayer();
             }
             @Override
             public void onSwipeBottom() {

@@ -12,6 +12,8 @@
     <string name="title_dropdown_position">Position</string>
     <string name="title_dropdown_rank">Rank</string>
     <string name="title_discovery_settings">Discovery settings</string>
+    <string name="position_placeholder">Position: %1$s</string>
+    <string name="rank_placeholder">Rank %1$s</string>
 
     <string name="no_game_selected">Select game…</string>
     <string-array name="dropdown_games">

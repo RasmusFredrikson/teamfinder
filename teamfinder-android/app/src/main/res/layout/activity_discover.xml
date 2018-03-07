@@ -20,7 +20,7 @@
         app:menu="@menu/navigation" />
 
     <ImageView
-        android:id="@+id/playerImage"
+        android:id="@+id/playerImage1"
         android:layout_width="356dp"
         android:layout_height="291dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
         app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
-        android:id="@+id/playerName"
+        android:id="@+id/playerName1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="36dp"
@@ -40,10 +40,10 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerImage" />
+        app:layout_constraintTop_toBottomOf="@+id/playerImage1" />
 
     <TextView
-        android:id="@+id/playerRank"
+        android:id="@+id/playerRank1"
         android:layout_width="82dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="36dp"
@@ -52,8 +52,8 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/playerName"
-        app:layout_constraintTop_toBottomOf="@+id/playerName" />
+        app:layout_constraintStart_toStartOf="@+id/playerName1"
+        app:layout_constraintTop_toBottomOf="@+id/playerName1" />
 
     <TextView
         android:id="@+id/playerPosition"
@@ -62,8 +62,8 @@
         android:layout_marginStart="32dp"
         android:text="TextView"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/playerRank"
-        app:layout_constraintStart_toEndOf="@+id/playerRank" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/playerRank1"
+        app:layout_constraintStart_toEndOf="@+id/playerRank1" />
 
     <TextView
         android:id="@+id/playerInfo"
@@ -72,7 +72,7 @@
         android:layout_marginTop="12dp"
         android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/playerRank"
-        app:layout_constraintTop_toBottomOf="@+id/playerRank" />
+        app:layout_constraintStart_toStartOf="@+id/playerRank1"
+        app:layout_constraintTop_toBottomOf="@+id/playerRank1" />
 
 </android.support.constraint.ConstraintLayout>
