@@ -10,45 +10,47 @@
     <TextView
         android:id="@+id/playerName1"
         android:layout_width="wrap_content"
-        android:layout_height="19dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
         android:text="@string/title_home"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toEndOf="@+id/playerImage1"
         app:layout_constraintTop_toTopOf="@+id/playerImage1" />
 
     <TextView
         android:id="@+id/playerRank1"
-        android:layout_width="wrap_content"
+        android:layout_width="58dp"
         android:layout_height="19dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="44dp"
         android:text="TextView"
+        app:layout_constraintBaseline_toBaselineOf="@+id/playerName1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/playerName1"
-        app:layout_constraintTop_toTopOf="@+id/playerName1" />
+        app:layout_constraintStart_toEndOf="@+id/playerName1" />
 
     <TextView
         android:id="@+id/playerPosition1"
-        android:layout_width="58dp"
-        android:layout_height="19dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
         android:layout_marginStart="16dp"
         android:text="TextView"
+        app:layout_constraintBaseline_toBaselineOf="@+id/playerRank1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/playerRank1"
-        app:layout_constraintTop_toTopOf="@+id/playerRank1" />
+        app:layout_constraintStart_toEndOf="@+id/playerRank1" />
 
     <ImageView
         android:id="@+id/playerImage1"
-        android:layout_width="58dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="75dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/playerImage2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread"
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <android.support.design.widget.BottomNavigationView
@@ -63,53 +65,62 @@
 
     <ImageView
         android:id="@+id/playerImage3"
-        android:layout_width="58dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="75dp"
         android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         app:layout_constraintBottom_toTopOf="@+id/playerImage4"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playerImage2"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
         android:id="@+id/playerImage5"
-        android:layout_width="58dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="75dp"
         android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playerImage4"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
         android:id="@+id/playerImage4"
-        android:layout_width="58dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="75dp"
         android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         app:layout_constraintBottom_toTopOf="@+id/playerImage5"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playerImage3"
         app:layout_constraintVertical_bias="0.518"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
         android:id="@+id/playerImage2"
-        android:layout_width="58dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="75dp"
         android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         app:layout_constraintBottom_toTopOf="@+id/playerImage3"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playerImage1"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/playerName2"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/playerImage2"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/playerName1"
         app:layout_constraintTop_toTopOf="@+id/playerImage2" />
 
     <TextView
@@ -117,87 +128,77 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/playerRank2"
-        app:layout_constraintTop_toTopOf="@+id/playerName3" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/playerName3"
+        app:layout_constraintStart_toStartOf="@+id/playerRank2" />
 
     <TextView
         android:id="@+id/playerRank4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/playerRank3"
-        app:layout_constraintTop_toTopOf="@+id/playerName4" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/playerName4"
+        app:layout_constraintStart_toStartOf="@+id/playerRank3" />
 
     <TextView
         android:id="@+id/playerRank5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/playerRank4"
-        app:layout_constraintTop_toTopOf="@+id/playerName5" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/playerName5"
+        app:layout_constraintStart_toStartOf="@+id/playerRank4" />
 
     <TextView
         android:id="@+id/playerPosition2"
-        android:layout_width="58dp"
-        android:layout_height="19dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/playerPosition1"
-        app:layout_constraintTop_toTopOf="@+id/playerRank2" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/playerRank2"
+        app:layout_constraintStart_toStartOf="@+id/playerPosition1" />
 
     <TextView
         android:id="@+id/playerPosition3"
         android:layout_width="58dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/playerPosition2"
-        app:layout_constraintTop_toTopOf="@+id/playerRank3" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/playerRank3"
+        app:layout_constraintStart_toStartOf="@+id/playerPosition2" />
 
     <TextView
         android:id="@+id/playerPosition4"
-        android:layout_width="58dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/playerPosition3"
-        app:layout_constraintTop_toTopOf="@+id/playerRank4" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/playerRank4"
+        app:layout_constraintStart_toStartOf="@+id/playerPosition3" />
 
     <TextView
         android:id="@+id/playerPosition5"
-        android:layout_width="58dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/playerPosition4"
-        app:layout_constraintTop_toTopOf="@+id/playerRank5" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/playerRank5"
+        app:layout_constraintStart_toStartOf="@+id/playerPosition4" />
 
     <TextView
         android:id="@+id/playerName4"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/playerImage4"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/playerName3"
         app:layout_constraintTop_toTopOf="@+id/playerImage4" />
 
     <TextView
         android:id="@+id/playerName5"
-        android:layout_width="59dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/playerImage5"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/playerName4"
         app:layout_constraintTop_toTopOf="@+id/playerImage5" />
 
     <TextView
@@ -205,17 +206,18 @@
         android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/playerRank1"
-        app:layout_constraintTop_toTopOf="@+id/playerName2" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/playerName2"
+        app:layout_constraintStart_toStartOf="@+id/playerRank1" />
 
     <TextView
         android:id="@+id/playerName3"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/playerImage3"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/playerName2"
         app:layout_constraintTop_toTopOf="@+id/playerImage3" />
 
 </android.support.constraint.ConstraintLayout>

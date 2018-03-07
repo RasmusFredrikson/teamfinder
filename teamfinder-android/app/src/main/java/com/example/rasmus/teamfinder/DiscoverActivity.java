@@ -21,7 +21,7 @@ import static com.example.rasmus.teamfinder.MyProfileActivity.MY_DISCOVERY_SETTI
 
 public class DiscoverActivity extends AppCompatActivity {
 
-    private static final String[] playerNames = {"Snow", "Danette", "Lagging Ninja", "Parachuting Nader", "Bomber", "Gunner", "FighTer", "MeD1c", "Pwner", "Muffins"};
+    private static final String[] playerNames = {"Snow", "Danette", "Ninja", "Nader", "Bomber", "Gunner", "FighTer", "MeD1c", "Pwner", "Muffins"};
     private static final String[] playerRanks = {"I", "II", "III", "IV", "V"};
     private static final String[] playerPositions = {"Top", "Bottom", "Mid", "AD-Carrier", "Support"};
     private static final String[] playerInfos = {
@@ -131,10 +131,10 @@ public class DiscoverActivity extends AppCompatActivity {
 
         discoverySettings = getSharedPreferences(MY_DISCOVERY_SETTINGS, MODE_PRIVATE);
 
-        playerImage = findViewById(R.id.playerImage1);
+        playerImage = findViewById(R.id.playerImage);
         playerInfo = findViewById(R.id.playerInfo);
-        playerName = findViewById(R.id.playerName1);
-        playerRank = findViewById(R.id.playerRank1);
+        playerName = findViewById(R.id.playerName);
+        playerRank = findViewById(R.id.playerRank);
         playerPosition = findViewById(R.id.playerPosition);
 
         playerImage.setOnTouchListener(new OnSwipeTouchListener(DiscoverActivity.this) {
