@@ -1,20 +1,20 @@
 package com.example.rasmus.teamfinder;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.mindorks.placeholderview.SwipeDecor;
+import com.mindorks.placeholderview.SwipePlaceHolderView;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import static com.example.rasmus.teamfinder.MyProfileActivity.MY_DISCOVERY_SETTINGS;
@@ -39,11 +39,11 @@ public class DiscoverActivity extends AppCompatActivity {
             R.drawable.katarina, R.drawable.poros
     };
 
-    private ImageView playerImage;
-    private TextView playerName, playerRank, playerPosition, playerInfo;
+    private SwipePlaceHolderView mSwipeView;
+    private Context mContext;
     private SharedPreferences discoverySettings;
     Integer selectedImage;
-    String selectedPlayer, selectedInfo, selectedRank, selectedPosition;
+    String selectedName, selectedInfo, selectedRank, selectedPosition;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -66,63 +66,28 @@ public class DiscoverActivity extends AppCompatActivity {
         }
     };
 
-    public void getNewPlayer() {
+    public Player getNewPlayer() {
         Random r = new Random();
         Resources res = getResources();
 
-        int playerIndex = r.nextInt(playerNames.length);
-        playerName.setText(playerNames[playerIndex]);
-        selectedPlayer = playerNames[playerIndex];
-
-        playerIndex = r.nextInt(playerInfos.length);
-        playerInfo.setText(playerInfos[playerIndex]);
-        selectedInfo = playerInfos[playerIndex];
-
-        playerIndex = r.nextInt(playerPositions.length);
+        selectedName = playerNames[r.nextInt(playerNames.length)];
+        selectedInfo = playerInfos[r.nextInt(playerInfos.length)];
+        selectedImage = playerImages[r.nextInt(playerImages.length)];
 
         if (!discoverySettings.getString("selectedPosition","").equals(res.getString(R.string.no_position_selected))) {
-            playerPosition.setText(String.format(res.getString(R.string.position_placeholder), discoverySettings.getString("selectedPosition", null)));
+            selectedPosition = discoverySettings.getString("selectedPosition", null);
         } else {
-            playerPosition.setText(String.format(res.getString(R.string.position_placeholder), playerPositions[playerIndex]));
+            selectedPosition = playerPositions[r.nextInt(playerPositions.length)];
         }
-        selectedPosition = playerPositions[playerIndex];
-
-        playerIndex = r.nextInt(playerRanks.length);
 
         if (!discoverySettings.getString("selectedRank","").equals(res.getString(R.string.no_rank_selected))) {
-            playerRank.setText(String.format(res.getString(R.string.rank_placeholder), discoverySettings.getString("selectedRank", null)));
+            selectedRank = discoverySettings.getString("selectedRank", null);
         } else {
-            playerRank.setText(String.format(res.getString(R.string.rank_placeholder), playerRanks[playerIndex]));
+            selectedRank = playerRanks[r.nextInt(playerRanks.length)];
         }
-        selectedRank = playerRanks[playerIndex];
 
-        playerIndex = r.nextInt(playerImages.length);
-        playerImage.setImageResource(playerImages[playerIndex]);
-        selectedImage = playerImages[playerIndex];
+        return new Player(selectedName, selectedPosition, selectedRank, selectedInfo, selectedImage);
     }
-
-    private void matchPlayer() {
-        Random r = new Random();
-        //if (r.nextInt(10) > 4) {
-            SharedPreferences.Editor editor = discoverySettings.edit();
-            Gson gson = new Gson();
-
-            String json = discoverySettings.getString("matchedPlayers", "");
-            ArrayList<Player> updatedMatchedPlayerNames;
-            if (!json.equals("")) {
-                ArrayList<Player> previouslyMatchedPlayerNames = gson.fromJson(json,new TypeToken<ArrayList<Player>>(){}.getType());
-                updatedMatchedPlayerNames = new ArrayList<>(previouslyMatchedPlayerNames);
-            } else
-                updatedMatchedPlayerNames = new ArrayList<>();
-
-            updatedMatchedPlayerNames.add(new Player(selectedPlayer,selectedPosition,selectedRank,selectedInfo,selectedImage));
-
-            json = gson.toJson(updatedMatchedPlayerNames);
-            editor.putString("matchedPlayers", json);
-            editor.apply();
-        //}
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,36 +96,34 @@ public class DiscoverActivity extends AppCompatActivity {
 
         discoverySettings = getSharedPreferences(MY_DISCOVERY_SETTINGS, MODE_PRIVATE);
 
-        playerImage = findViewById(R.id.playerImage);
-        playerInfo = findViewById(R.id.playerInfo);
-        playerName = findViewById(R.id.playerName);
-        playerRank = findViewById(R.id.playerRank);
-        playerPosition = findViewById(R.id.playerPosition);
+        mSwipeView = findViewById(R.id.swipeView);
+        mContext = getApplicationContext();
 
-        playerImage.setOnTouchListener(new OnSwipeTouchListener(DiscoverActivity.this) {
-            @Override
-            public void onSwipeTop() {
-            }
-            @Override
-            public void onSwipeRight() {
-                getNewPlayer();
-            }
-            @Override
-            public void onSwipeLeft() {
-                matchPlayer();
-                getNewPlayer();
-            }
-            @Override
-            public void onSwipeBottom() {
-            }
-        });
+        int bottomMargin = com.example.rasmus.teamfinder.Utils.dpToPx(160);
+        Point windowSize = com.example.rasmus.teamfinder.Utils.getDisplaySize(getWindowManager());
+        mSwipeView.getBuilder()
+                .setDisplayViewCount(3)
+                .setIsUndoEnabled(true)
+                .setHeightSwipeDistFactor(10)
+                .setWidthSwipeDistFactor(5)
+                .setSwipeDecor(new SwipeDecor()
+                        .setViewWidth(windowSize.x)
+                        .setViewHeight(windowSize.y - bottomMargin)
+                        .setViewGravity(Gravity.TOP)
+                        .setPaddingTop(20)
+                        .setRelativeScale(0.01f)
+                        .setSwipeMaxChangeAngle(2f)
+                        .setSwipeInMsgLayoutId(R.layout.tinder_swipe_in_msg_view)
+                        .setSwipeOutMsgLayoutId(R.layout.tinder_swipe_out_msg_view));
+
+        for (int i = 0; i < 20; i++) {
+            mSwipeView.addView(new PlayerCard(mContext, getNewPlayer(), mSwipeView, discoverySettings));
+        }
 
         overridePendingTransition(0, 0);
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_discovery);
-
-        getNewPlayer();
     }
 }

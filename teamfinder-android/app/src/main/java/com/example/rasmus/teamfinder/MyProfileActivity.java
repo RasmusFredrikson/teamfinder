@@ -30,10 +30,12 @@ public class MyProfileActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_discovery:
                     Intent discoverActivityIntent = new Intent(getApplicationContext(), DiscoverActivity.class);
+                    saveDiscoverySettings();
                     startActivity(discoverActivityIntent);
                     return true;
                 case R.id.navigation_matches:
                     Intent matchesActivityIntent = new Intent(getApplicationContext(), MatchesActivity.class);
+                    saveDiscoverySettings();
                     startActivity(matchesActivityIntent);
                     return true;
                 case R.id.navigation_profile:
@@ -49,6 +51,10 @@ public class MyProfileActivity extends AppCompatActivity {
         // Save UI state changes to the savedInstanceState.
         // This bundle will be passed to onCreate if the process is
         // killed and restarted.
+
+    }
+
+    public void saveDiscoverySettings() {
         SharedPreferences.Editor editor = getSharedPreferences(MY_DISCOVERY_SETTINGS, MODE_PRIVATE).edit();
         editor.putInt("gameIndex", gameDropdown.getSelectedItemPosition());
         editor.putString("selectedGame", gameDropdown.getSelectedItem().toString());
