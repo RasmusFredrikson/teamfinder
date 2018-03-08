@@ -45,15 +45,6 @@ public class MyProfileActivity extends AppCompatActivity {
         }
     };
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        // Save UI state changes to the savedInstanceState.
-        // This bundle will be passed to onCreate if the process is
-        // killed and restarted.
-
-    }
-
     public void saveDiscoverySettings() {
         SharedPreferences.Editor editor = getSharedPreferences(MY_DISCOVERY_SETTINGS, MODE_PRIVATE).edit();
         editor.putInt("gameIndex", gameDropdown.getSelectedItemPosition());
@@ -64,16 +55,6 @@ public class MyProfileActivity extends AppCompatActivity {
         editor.putString("selectedRank", rankDropdown.getSelectedItem().toString());
 
         editor.apply();
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        // Restore UI state from the savedInstanceState.
-        // This bundle has also been passed to onCreate.
-        gameDropdown.setSelection(savedInstanceState.getInt("gameIndex"));
-        positionDropdown.setSelection(savedInstanceState.getInt("positionIndex"));
-        rankDropdown.setSelection(savedInstanceState.getInt("rankIndex"));
     }
 
     @Override
