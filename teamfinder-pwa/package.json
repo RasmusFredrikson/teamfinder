@@ -1,0 +1,19 @@
+{
+  "name": "k0zkorz3j7",
+  "description": null,
+  "version": "0.0.34",
+  "dependencies": {
+    "react-swipe-card": "0.1.4",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
