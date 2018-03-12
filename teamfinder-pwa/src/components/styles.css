@@ -51,6 +51,7 @@ h1, h2 {
 .animate {
     transition: transform .3s;
     box-shadow: none;
+    transform: translate3d(1px, 0px, 0px) !important;
 }
 
 .inactive {
