@@ -20,22 +20,22 @@ const Wrapper = ({data, onSwipeLeft, onSwipeRight}) => {
       )}
     </Cards>
   )
-}
+};
 
 export default class MyCards extends Component {
   state = {
     data: ['Alexandre', 'Thomas', 'Lucien', 'Raphael', 'Donatello', 'Michelangelo', 'Leonardo'],
     liked: [],
     disliked: []
-  }
+  };
   onSwipeLeft = () => {
      const newData = this.state.data.slice(1);
      this.setState(prevState => ({ data: newData, disliked: [...prevState.disliked, prevState.data[0]]}));
-  }
+  };
   onSwipeRight = () => {
     const newData = this.state.data.slice(1);
     this.setState(prevState => ({ data: newData, liked: [...prevState.liked, prevState.data[0]] }));
-  }
+  };
   render() {
     return (
       <div>
