@@ -4,49 +4,95 @@ import './styles.css';
 
 
 
-const Wrapper = ({data, onSwipeLeft, onSwipeRight}) => {
-    function sayHello() {
-        console.log("Hello");
-    }
+const Wrapper = ({data: players, onSwipeLeft, onSwipeRight}) => {
+
     return (
-    <Cards onEnd={sayHello} className='master-root'>
-      {data.map(item =>
-        <Card
-          key={item}
-          onSwipeLeft={() => onSwipeLeft(item)}
-          onSwipeRight={() => onSwipeRight(item)}>
-          <h2>{item}</h2>
-        </Card>
-      )}
-    </Cards>
-  )
+        <Cards className='master-root'>
+            {players.map(player => {
+                return (
+                    <Card
+                        key={player.id}
+                        onSwipeLeft={() => onSwipeLeft(player.name)}
+                        onSwipeRight={() => onSwipeRight(player.name)}>
+                        <div className="card-content">
+                            <img alt={player.image} src={`img/${player.image}`}/>
+                            <div className="player-info">
+                                <h1>{player.name}, Rank {player.rank}</h1>
+                                <h2>Position: {player.position}</h2>
+                                <p>{player.info}</p>
+                            </div>
+                        </div>
+                    </Card>
+                )}
+            )}
+        </Cards>
+    )
 };
 
+function getPlayers() {
+    let playerNames = ["Snow", "Danette", "Ninja", "Nader", "Bomber", "Gunner", "FighTer", "MeD1c", "Pwner", "Muffins"];
+    let playerRanks = ["I", "II", "III", "IV", "V"];
+    let playerPositions = ["Top", "Bottom", "Mid", "AD-Carrier", "Support"];
+    let playerInfos = [
+        "My name is David and I love playing, always play for hours.",
+        "Hello, I love playing computer games, right now I'm looking for a team.",
+        "Wow, games are soooooooooooooo amazing, plx add.",
+        "Hi there, do you wanna play?",
+        "<3<3<3<3<3<3<3",
+        "IM THE BEST PLAYER IN EXISTENT ALL GAMES ARE THE BEZZZT",
+        "I just started playing games and don't really like it that much..."
+    ];
+    let playerImages = [
+        "amumu.jpeg", "ashe.jpeg", "darius.jpeg", "jinx.jpeg", "lux.jpeg",
+        "teemo.jpeg", "volibear.jpeg", "annie.jpeg", "braum.jpeg", "karthus.jpg",
+        "katarina.jpeg", "poros.jpeg"
+    ];
+
+    let players = [];
+
+    for (let i = 0; i < 20; i++) {
+        players[i] = {
+            id: i,
+            name: playerNames[randomizeIndex(playerNames.length)],
+            position: playerPositions[randomizeIndex(playerPositions.length)],
+            rank: playerRanks[randomizeIndex(playerRanks.length)],
+            info: playerInfos[randomizeIndex(playerInfos.length)],
+            image: playerImages[randomizeIndex(playerImages.length)]
+        }
+    }
+
+    return players;
+}
+
+function randomizeIndex(listLength) {
+    return Math.floor((Math.random() * listLength));
+}
+
 export default class MyCards extends Component {
-  state = {
-    data: ['Alexandre', 'Thomas', 'Lucien', 'Raphael', 'Donatello', 'Michelangelo', 'Leonardo'],
-    liked: [],
-    disliked: []
-  };
-  onSwipeLeft = () => {
-     const newData = this.state.data.slice(1);
-     this.setState(prevState => ({ data: newData, disliked: [...prevState.disliked, prevState.data[0]]}));
-  };
-  onSwipeRight = () => {
-    const newData = this.state.data.slice(1);
-    this.setState(prevState => ({ data: newData, liked: [...prevState.liked, prevState.data[0]] }));
-  };
-  render() {
-    return (
-      <div>
-        <Wrapper 
-          onSwipeLeft={this.onSwipeLeft}
-          onSwipeRight={this.onSwipeRight}
-          data={this.state.data}
-        />
-        <ul>Liked: {this.state.liked.map(data => <li>{data}</li>)}</ul>
-        <ul>Disliked: {this.state.disliked.map(data => <li>{data}</li>)}</ul>
-      </div>
-    )
-  }
+    state = {
+        players: getPlayers(),
+        matched: [],
+        turn: 0
+    };
+    onSwipeLeft = () => {
+        this.state.turn++;
+    };
+    onSwipeRight = () => {
+        if (randomizeIndex(10) > 6) {
+            this.setState(prevState => ({matched: [...prevState.matched, prevState.players[this.state.turn]]}));
+            console.log(this.state.matched);
+        }
+        this.state.turn++;
+    };
+    render() {
+        return (
+            <div>
+                <Wrapper
+                    onSwipeLeft={this.onSwipeLeft}
+                    onSwipeRight={this.onSwipeRight}
+                    data={this.state.players}
+                />
+            </div>
+        )
+    }
 }

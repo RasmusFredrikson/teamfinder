@@ -14,10 +14,6 @@ body {
     text-align: center;
 }
 
-img {
-    width: 100%;
-}
-
 li {
     list-style: none;
 }
@@ -37,10 +33,9 @@ h1, h2 {
 .card {
     background-size: cover;
     position: absolute;
-    text-align: center;
     top: 0;
-    background: red;
-    height: 85%;
+    background: white;
+    height: 80%;
     margin: 0;
     transition: box-shadow .3s;
     box-shadow: 1px 15px 20px rgba(0,0,0,0.40), 0 6px 6px rgba(0,0,0,0.23);
@@ -49,9 +44,39 @@ h1, h2 {
     width: 90%;
 }
 
+.card-content {
+    width: 100%;
+    height: 100%;
+}
+
+.card-content img {
+    width: 100%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.player-info {
+    text-align: left;
+    padding-left: 15px;
+}
+
+.card-content h1 {
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.card-content h2 {
+    font-weight: 300;
+    font-size: 18px;
+}
+
+.card-content p {
+    font-size: 16px;
+}
+
 .animate {
     transition: transform .3s;
-    box-shadow: none;
+    /*box-shadow: none;*/
     width: 90%;
 }
 
