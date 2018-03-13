@@ -1,0 +1,8 @@
+#outImage {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+#selectImage {
+    display: none;
+}

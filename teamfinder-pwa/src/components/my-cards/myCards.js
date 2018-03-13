@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Cards, { Card } from 'react-swipe-card'
-import './styles.css';
+import './myCards.css';
 
 
 
