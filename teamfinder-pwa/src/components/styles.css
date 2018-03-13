@@ -8,7 +8,7 @@ html {
 }
 
 body {
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
     font-family: sans-serif;
     text-align: center;
@@ -27,7 +27,6 @@ h1, h2 {
 }
 
 .master-root {
-    /*position: relative;*/
     min-height: 660px;
     max-height: 660px;
     width: 100%;
@@ -38,25 +37,27 @@ h1, h2 {
 .card {
     background-size: cover;
     position: absolute;
+    text-align: center;
     top: 0;
-    background: #F8F3F3;
-    height: 90%;
-    width: 100%;
+    background: red;
+    height: 85%;
     margin: 0;
     transition: box-shadow .3s;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    box-shadow: 1px 15px 20px rgba(0,0,0,0.40), 0 6px 6px rgba(0,0,0,0.23);
     cursor: pointer;
+    border-radius: 15px;
+    width: 90%;
 }
 
 .animate {
     transition: transform .3s;
     box-shadow: none;
-    transform: translate3d(1px, 0px, 0px) !important;
+    width: 90%;
 }
 
 .inactive {
-    box-shadow: none;
-    transform: translate3d(1px, 0px, 0px) !important;
+    /*box-shadow: none;*/
+    width: 90%;
 }
 
 .alert {
