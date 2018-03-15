@@ -1,8 +1,38 @@
 #outImage {
-    max-width: 200px;
-    max-height: 200px;
+    margin-top: 60px;
+    max-width: 300px;
+    max-height: 300px;
 }
 
 #selectImage {
     display: none;
+}
+
+.player-name {
+    margin-top: 10px;
+    font-size: 24px;
+    color: grey;
+}
+
+.select-settings {
+    margin: 0 auto;
+    width: 250px;
+    padding-top: 20px;
+}
+
+select, label {
+    text-align: left;
+    display:block;
+}
+
+select {
+    height: 30px;
+    width: 100%;
+}
+
+p {
+    font-weight: bold;
+    text-align: left;
+    font-size: 18px;
+    margin-top: 0;
 }

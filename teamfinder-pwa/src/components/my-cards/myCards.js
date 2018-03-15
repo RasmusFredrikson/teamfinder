@@ -50,12 +50,13 @@ function getPlayers() {
 
     let players = [];
 
+
     for (let i = 0; i < 20; i++) {
         players[i] = {
             id: i,
             name: playerNames[randomizeIndex(playerNames.length)],
-            position: playerPositions[randomizeIndex(playerPositions.length)],
-            rank: playerRanks[randomizeIndex(playerRanks.length)],
+            position: localStorage.getItem('selectedPosition') || playerPositions[randomizeIndex(playerPositions.length)],
+            rank: localStorage.getItem('selectedRank') || playerRanks[randomizeIndex(playerRanks.length)],
             info: playerInfos[randomizeIndex(playerInfos.length)],
             image: playerImages[randomizeIndex(playerImages.length)]
         }
@@ -80,7 +81,8 @@ export default class MyCards extends Component {
     onSwipeRight = () => {
         if (randomizeIndex(10) > 6) {
             this.setState(prevState => ({matched: [...prevState.matched, prevState.players[this.state.turn]]}));
-            console.log(this.state.matched);
+            localStorage.setItem("matchedPlayers", JSON.stringify(this.state.matched));
+            console.log(JSON.parse(localStorage.getItem('matchedPlayers')));
         }
         this.state.turn++;
     };
