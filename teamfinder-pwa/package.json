@@ -3,9 +3,10 @@
   "description": null,
   "version": "0.0.34",
   "dependencies": {
-    "react-swipe-card": "0.1.4",
     "react": "^15.6.2",
-    "react-dom": "^15.6.2"
+    "react-dom": "^15.6.2",
+    "react-router-dom": "^4.2.2",
+    "react-swipe-card": "0.1.4"
   },
   "devDependencies": {
     "react-scripts": "1.0.0"

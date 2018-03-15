@@ -29,18 +29,20 @@
 
 /* Place the navbar at the bottom of the page, and make it stick */
 .navbar {
-    background-color: #333;
+    background-color: white;
     overflow: hidden;
     position: fixed;
     bottom: 0;
     width: 100%;
     height: 75px;
+    box-shadow: 0 9px 29px;
+    border: 1px  #CCC solid;
 }
 
 /* Style the links inside the navigation bar */
 .navbar a {
     display: inline-block;
-    color: #f2f2f2;
+    color: grey;
     text-align: center;
     padding: 30px 25px;
     text-decoration: none;
@@ -49,14 +51,12 @@
 
 /* Change the color of links on hover */
 .navbar a:hover {
-    background-color: #ddd;
     color: black;
 }
 
 /* Add a green background color to the active link */
 .navbar a.active {
-    background-color: #4CAF50;
-    color: white;
+    color: black;
 }
 
 /* Hide the link that should open and close the navbar on small screens */
