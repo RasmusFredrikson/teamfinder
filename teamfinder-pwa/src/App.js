@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import MyCards from "./components/my-cards/myCards";
 import MyProfile from "./components/my-profile/myProfile";
+import Matches from "./components/matches/matches";
 import "./App.css";
 
 class App extends Component {
@@ -16,7 +17,7 @@ class App extends Component {
                     </div>
                     <Route exact path="/" component={MyProfile} />
                     <Route path="/discovery" component={MyCards} />
-                    {/*<Route path="/topics" component={Matches} />*/}
+                    <Route path="/matches" component={Matches} />
                 </div>
             </Router>
         );

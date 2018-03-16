@@ -1,0 +1,26 @@
+.matchedPlayer {
+    display: inline-block;
+    margin-top: 50px;
+    margin-left: 20px;
+    float: left;
+}
+
+.playerInfo {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 13px;
+}
+
+.matchedPlayer img {
+    max-height: 80px;
+    max-width: 80px;
+}
+
+.matchedPlayer span {
+    margin-top: 0;
+    padding-left: 20px;
+}
+
+.playerName {
+    font-weight: bold;
+}

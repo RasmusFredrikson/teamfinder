@@ -32,7 +32,7 @@ const Wrapper = ({data: players, onSwipeLeft, onSwipeRight}) => {
 function getPlayers() {
     let playerNames = ["Snow", "Danette", "Ninja", "Nader", "Bomber", "Gunner", "FighTer", "MeD1c", "Pwner", "Muffins"];
     let playerRanks = ["I", "II", "III", "IV", "V"];
-    let playerPositions = ["Top", "Bottom", "Mid", "AD-Carrier", "Support"];
+    let playerPositions = ["Top", "Jungle", "Mid", "AD-Carrier", "Support"];
     let playerInfos = [
         "My name is David and I love playing, always play for hours.",
         "Hello, I love playing computer games, right now I'm looking for a team.",
@@ -72,7 +72,7 @@ function randomizeIndex(listLength) {
 export default class MyCards extends Component {
     state = {
         players: getPlayers(),
-        matched: [],
+        matched: JSON.parse(localStorage.getItem('matchedPlayers')) || [],
         turn: 0
     };
     onSwipeLeft = () => {
@@ -82,7 +82,6 @@ export default class MyCards extends Component {
         if (randomizeIndex(10) > 6) {
             this.setState(prevState => ({matched: [...prevState.matched, prevState.players[this.state.turn]]}));
             localStorage.setItem("matchedPlayers", JSON.stringify(this.state.matched));
-            console.log(JSON.parse(localStorage.getItem('matchedPlayers')));
         }
         this.state.turn++;
     };
