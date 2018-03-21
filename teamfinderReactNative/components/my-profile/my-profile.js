@@ -5,24 +5,30 @@ import * as AsyncStorage from "react-native/Libraries/Storage/AsyncStorage";
 
 export default class MyProfile extends Component {
     state = {
-        // selectedGame: AsyncStorage.getItem('selectedGame') || "",
-        // selectedPosition: AsyncStorage.getItem('selectedPosition') || "",
-        // selectedRank: AsyncStorage.getItem('selectedRank') || "",
+        selectedGame: "",
+        selectedPosition: "",
+        selectedRank: "",
         playerImage: require("../../img/annie.jpeg")
+    };
+
+    componentDidMount = () => {
+        AsyncStorage.getItem('selectedGame').then((value) => this.setState({'selectedGame': value}));
+        AsyncStorage.getItem('selectedPosition').then((value) => this.setState({'selectedPosition': value}));
+        AsyncStorage.getItem('selectedRank').then((value) => this.setState({'selectedRank': value}));
     };
 
     saveSelection(value, type) {
         switch (type) {
             case "game":
-                // AsyncStorage.setItem('selectedGame', value);
+                AsyncStorage.setItem('selectedGame', value);
                 this.setState({selectedGame: value});
                 break;
             case "position":
-                // AsyncStorage.setItem('selectedPosition', value);
+                AsyncStorage.setItem('selectedPosition', value);
                 this.setState({selectedPosition: value});
                 break;
             case "rank":
-                // AsyncStorage.setItem('selectedRank', value);
+                AsyncStorage.setItem('selectedRank', value);
                 this.setState({selectedRank: value});
                 break;
             default:
