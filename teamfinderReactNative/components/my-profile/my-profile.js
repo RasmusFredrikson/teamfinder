@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-import {Button, Image, Picker, StyleSheet, Text, View} from 'react-native';
+import {Button, Image, Picker, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+
+import ImagePicker from "react-native-image-picker";
 
 export default class MyProfile extends Component {
     state = {
         selectedGame: "",
         selectedPosition: "",
-        selectedRank: ""
+        selectedRank: "",
+        avatarSource: require("../../img/annie.jpeg")
     };
 
     saveSelection(selectionBox) {
         console.log(this);
+        this.setSelectedImage();
+        console.log(this.state.avatarSource);
+
         // switch (selectionBox) {
         //     case "game":
         //         localStorage.setItem('selectedGame', document.getElementById("game-select").value);
@@ -32,7 +38,10 @@ export default class MyProfile extends Component {
         return (
             <View style={styles.parentView}>
                 {/*<input type="file" accept="image/*" id="selectImage" onChange={this.setSelectedImage}/>*/}
-                <Image style={styles.outImage} alt="Profile" source={require("../../img/annie.jpeg")} id="outImage"/>
+                <TouchableHighlight onPress={() => this.setSelectedImage()}>
+                    <Image source={this.state.avatarSource} style={styles.outImage}/>
+                </TouchableHighlight>
+                {/*<Image style={styles.outImage} alt="Profile" source={require("../../img/annie.jpeg")} id="outImage"/>*/}
                 <Text style={styles.label}>Muffins1337</Text>
                 <View style={styles.selectSettings}>
                     <Text style={styles.label}>Discovery settings</Text>
@@ -69,24 +78,45 @@ export default class MyProfile extends Component {
         )
     }
 
-    clickSelectImage = () => {
-        document.getElementById("selectImage").click();
-    };
-
     setSelectedImage = () => {
-        let files = document.getElementById("selectImage").files[0];
+        // More info on all the options is below in the README...just some common use cases shown here
+        let options = {
+            title: 'Select Avatar',
+            storageOptions: {
+                skipBackup: true,
+                path: 'images'
+            }
+        };
 
-        if (files) {
-            let fr = new FileReader();
-            fr.onload = function () {
-                console.log("hej");
-                document.getElementById("outImage").src = fr.result;
-            };
-            fr.readAsDataURL(document.getElementById("selectImage").files[0]);
-        }
+        /**
+         * The first arg is the options object for customization (it can also be null or omitted for default options),
+         * The second arg is the callback which sends object: response (more info below in README)
+         */
+        ImagePicker.showImagePicker(options, (response) => {
+
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            }
+            else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            }
+            else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            }
+            else {
+                // You can also display the image using data:
+                let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+                this.setState({
+                    avatarSource: source
+                });
+
+            }
+        });
     };
 }
-
 
 const styles = StyleSheet.create({
     parentView: {
@@ -94,8 +124,9 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     outImage: {
+        width: 300,
+        minHeight: 200,
         marginTop: 100,
-        maxWidth: 300,
         maxHeight: 300
     },
     selectImage: {
