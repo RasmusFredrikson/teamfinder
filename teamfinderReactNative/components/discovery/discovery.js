@@ -3,47 +3,6 @@ import {Button, Image, StyleSheet, Text, View} from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import * as AsyncStorage from "react-native/Libraries/Storage/AsyncStorage";
 
-
-function getPlayers() {
-    let playerNames = ["Snow", "Danette", "Ninja", "Nader", "Bomber", "Gunner", "FighTer", "MeD1c", "Pwner", "Muffins"];
-    let playerRanks = ["I", "II", "III", "IV", "V"];
-    let playerPositions = ["Top", "Jungle", "Mid", "AD-Carrier", "Support"];
-    let playerInfos = [
-        "My name is David and I love playing, always play for hours.",
-        "Hello, I love playing computer games, right now I'm looking for a team.",
-        "Wow, games are soooooooooooooo amazing, plx add.",
-        "Hi there, do you wanna play?",
-        "<3<3<3<3<3<3<3",
-        "IM THE BEST PLAYER IN EXISTENT ALL GAMES ARE THE BEZZZT",
-        "I just started playing games and don't really like it that much..."
-    ];
-    let playerImages = [
-        require("../..//img/amumu.jpeg"), require("../..//img/ashe.jpeg"), require("../..//img/darius.jpeg"), require("../..//img/jinx.jpeg"), require("../..//img/lux.jpeg"),
-        require("../..//img/teemo.jpeg"), require("../..//img/volibear.jpeg"), require("../..//img/annie.jpeg"), require("../..//img/braum.jpeg"), require("../..//img/karthus.jpg"),
-        require("../..//img/katarina.jpeg"), require("../..//img/poros.jpeg")
-    ];
-
-    let players = [];
-    let selectPosition = null;
-    let selectedRank = null;
-
-    AsyncStorage.getItem('selectedPosition').then((value) => selectPosition = value);
-    AsyncStorage.getItem('selectedRank').then((value) => selectedRank = value);
-
-    for (let i = 0; i < 20; i++) {
-        players[i] = {
-            id: i,
-            name: playerNames[randomizeIndex(playerNames.length)],
-            position: selectPosition || playerPositions[randomizeIndex(playerPositions.length)],
-            rank: selectedRank || playerRanks[randomizeIndex(playerRanks.length)],
-            info: playerInfos[randomizeIndex(playerInfos.length)],
-            image: playerImages[randomizeIndex(playerImages.length)]
-        }
-    }
-
-    return players;
-}
-
 function randomizeIndex(listLength) {
     return Math.floor((Math.random() * listLength));
 }
@@ -52,23 +11,37 @@ export default class Discovery extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            cards: getPlayers(),
+            isLoading: true,
+            cards: this.getPlayers(),
             swipedAllCards: false,
             swipeDirection: '',
             isSwipingBack: false,
-            cardIndex: 0
+            cardIndex: 0,
+            selectedPosition: null,
+            selectedRank: null
         }
+    }
+
+    // componentDidMount() {
+    //     this.setState({isLoading: false});
+    // }
+
+    componentWillReceiveProps() {
+        this.setState({
+            cards: this.getPlayers(),
+            cardIndex: 0
+        })
     }
 
     renderCard = player => {
         return (
             <View style={styles.card} className="card-content">
-                <Image alt={player.image} source={player.image}/>
-                    <View className="player-info">
-                        <Text>{player.name}, Rank {player.rank}</Text>
-                        <Text>Position: {player.position}</Text>
-                        <Text>{player.info}</Text>
-                    </View>
+                <Image style={styles.playerImage} source={player.image}/>
+                <View className="player-info">
+                    <Text>{player.name}, Rank {player.rank}</Text>
+                    <Text>Position: {player.position}</Text>
+                    <Text>{player.info}</Text>
+                </View>
             </View>
         )
     };
@@ -103,6 +76,11 @@ export default class Discovery extends Component {
     };
 
     render () {
+        if(this.state.isLoading) {
+            console.log("loading");
+            return <View><Text>Loading...</Text></View>;
+        }
+        console.log(this.state.cards);
         return (
             <View style={styles.container}>
                 <Swiper
@@ -110,29 +88,13 @@ export default class Discovery extends Component {
                         this.swiper = swiper
                     }}
                     onSwiped={this.onSwiped}
-                    onTapCard={this.swipeLeft}
                     cards={this.state.cards}
                     cardIndex={this.state.cardIndex}
                     cardVerticalMargin={80}
                     renderCard={this.renderCard}
                     onSwipedAll={this.onSwipedAllCards}
+                    backgroundColor={'#FFFFFF'}
                     overlayLabels={{
-                        bottom: {
-                            title: 'BLEAH',
-                            style: {
-                                label: {
-                                    backgroundColor: 'black',
-                                    borderColor: 'black',
-                                    color: 'white',
-                                    borderWidth: 1
-                                },
-                                wrapper: {
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }
-                            }
-                        },
                         left: {
                             title: 'NOPE',
                             style: {
@@ -168,46 +130,69 @@ export default class Discovery extends Component {
                                     marginLeft: 30
                                 }
                             }
-                        },
-                        top: {
-                            title: 'SUPER LIKE',
-                            style: {
-                                label: {
-                                    backgroundColor: 'black',
-                                    borderColor: 'black',
-                                    color: 'white',
-                                    borderWidth: 1
-                                },
-                                wrapper: {
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }
-                            }
                         }
                     }}
                     animateOverlayLabelsOpacity
                     animateCardOpacity
                 >
-                    <Button onPress={this.swipeLeft} title='Swipe Left' />
                 </Swiper>
             </View>
         )
+    }
+
+    getPlayers() {
+        let playerNames = ["Snow", "Danette", "Ninja", "Nader", "Bomber", "Gunner", "FighTer", "MeD1c", "Pwner", "Muffins"];
+        let playerRanks = ["I", "II", "III", "IV", "V"];
+        let playerPositions = ["Top", "Jungle", "Mid", "AD-Carrier", "Support"];
+        let playerInfos = [
+            "My name is David and I love playing, always play for hours.",
+            "Hello, I love playing computer games, right now I'm looking for a team.",
+            "Wow, games are soooooooooooooo amazing, plx add.",
+            "Hi there, do you wanna play?",
+            "<3<3<3<3<3<3<3",
+            "IM THE BEST PLAYER IN EXISTENT ALL GAMES ARE THE BEZZZT",
+            "I just started playing games and don't really like it that much..."
+        ];
+        let playerImages = [
+            require("../..//img/amumu.jpeg"), require("../..//img/ashe.jpeg"), require("../..//img/darius.jpeg"), require("../..//img/jinx.jpeg"), require("../..//img/lux.jpeg"),
+            require("../..//img/teemo.jpeg"), require("../..//img/volibear.jpeg"), require("../..//img/annie.jpeg"), require("../..//img/braum.jpeg"), require("../..//img/karthus.jpg"),
+            require("../..//img/katarina.jpeg"), require("../..//img/poros.jpeg")
+        ];
+
+        let players = [];
+        let selectedPosition = "hej";
+        let selectedRank;
+
+        AsyncStorage.getItem('selectedPosition').then((value) => {
+            selectedPosition = value;
+        }).then(() => AsyncStorage.getItem('selectedRank').then((value) => selectedRank = value)).then(() => {
+                for (let i = 0; i < 20; i++) {
+                    players[i] = {
+                        id: i,
+                        name: playerNames[randomizeIndex(playerNames.length)],
+                        position: selectedPosition || playerPositions[randomizeIndex(playerPositions.length)],
+                        rank: selectedRank || playerRanks[randomizeIndex(playerRanks.length)],
+                        info: playerInfos[randomizeIndex(playerInfos.length)],
+                        image: playerImages[randomizeIndex(playerImages.length)]
+                    }
+                }
+                this.setState({cards: players})
+            }
+        ).then(() => { this.setState({isLoading: false})});
     }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F5FCFF'
+        backgroundColor: '#FF0000'
     },
     card: {
         flex: 1,
-        borderRadius: 4,
+        borderRadius: 15,
         borderWidth: 2,
-        borderColor: '#E8E8E8',
-        justifyContent: 'center',
-        backgroundColor: 'white'
+        borderColor: '#AAAAAA',
+        backgroundColor: 'white',
     },
     text: {
         textAlign: 'center',
@@ -219,5 +204,11 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: 'white',
         backgroundColor: 'transparent'
+    },
+    playerImage: {
+        width: 368,
+        height: 300,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15
     }
 });
