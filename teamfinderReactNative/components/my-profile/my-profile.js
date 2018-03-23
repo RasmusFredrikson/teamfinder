@@ -45,7 +45,7 @@ export default class MyProfile extends Component {
                 <Text style={styles.playerName}>Muffins1337</Text>
                 <View style={styles.discoverySettings}>
                     <Text style={styles.discoverySettingsHeader}>Discovery settings</Text>
-                    <Text htmlFor="game-select">Game</Text>
+                    <Text>Game</Text>
                     <View style={styles.pickerWrapper} >
                         <Picker style={styles.picker} selectedValue={this.state.selectedGame} onValueChange={(itemValue) => this.saveSelection(itemValue, "game")}>
                             <Picker.Item label="Select a game..." value=""/>
@@ -54,9 +54,9 @@ export default class MyProfile extends Component {
                         </Picker>
                     </View>
 
-                    <Text htmlFor="position-select">Position</Text>
+                    <Text>Position</Text>
                     <View style={styles.pickerWrapper} >
-                        <Picker style={styles.picker} id="position-select" selectedValue={this.state.selectedPosition} onValueChange={(itemValue) => this.saveSelection(itemValue, "position")}>
+                        <Picker style={styles.picker} selectedValue={this.state.selectedPosition} onValueChange={(itemValue) => this.saveSelection(itemValue, "position")}>
                             <Picker.Item label="Select a position..." value=""/>
                             <Picker.Item label="Top" value="Top"/>
                             <Picker.Item label="Mid" value="Mid"/>
@@ -66,9 +66,9 @@ export default class MyProfile extends Component {
                         </Picker>
                     </View>
 
-                    <Text style={styles.label} htmlFor="rank-select">Rank</Text>
+                    <Text style={styles.label}>Rank</Text>
                     <View style={styles.pickerWrapper} >
-                        <Picker style={styles.picker} id="rank-select" selectedValue={this.state.selectedRank} onValueChange={(itemValue) => this.saveSelection(itemValue, "rank")}>
+                        <Picker style={styles.picker} selectedValue={this.state.selectedRank} onValueChange={(itemValue) => this.saveSelection(itemValue, "rank")}>
                             <Picker.Item label="Select a rank..." value=""/>
                             <Picker.Item label="I" value="I"/>
                             <Picker.Item label="II" value="II"/>
