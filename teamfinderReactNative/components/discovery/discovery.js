@@ -37,9 +37,9 @@ class Discovery extends Component {
 
     renderCard = player => {
         return (
-            <View style={styles.card} className="card-content">
+            <View style={styles.card}>
                 <Image style={styles.playerImage} source={player.image}/>
-                <View className="player-info">
+                <View>
                     <Text>{player.name}, Rank {player.rank}</Text>
                     <Text>Position: {player.position}</Text>
                     <Text>{player.info}</Text>
@@ -129,25 +129,21 @@ class Discovery extends Component {
             require("../../img/katarina.jpeg"), require("../../img/poros.jpeg")
         ];
 
-        let players = [];
-        let selectedPosition, selectedRank;
-        console.log("hej");
-        AsyncStorage.getItem('selectedPosition').then((value) => {
-            selectedPosition = value;
-        }).then(() => AsyncStorage.getItem('selectedRank').then((value) => selectedRank = value)).then(() => {
-                for (let i = 0; i < 20; i++) {
-                    players[i] = {
-                        id: i,
-                        name: playerNames[randomizeIndex(playerNames.length)],
-                        position: selectedPosition || playerPositions[randomizeIndex(playerPositions.length)],
-                        rank: selectedRank || playerRanks[randomizeIndex(playerRanks.length)],
-                        info: playerInfos[randomizeIndex(playerInfos.length)],
-                        image: playerImages[randomizeIndex(playerImages.length)]
-                    }
+        AsyncStorage.multiGet(['selectedPosition','selectedRank']).then((values) => {
+            let players = [];
+
+            for (let i = 0; i < 20; i++) {
+                players[i] = {
+                    id: i,
+                    name: playerNames[randomizeIndex(playerNames.length)],
+                    position: values[0][1] || playerPositions[randomizeIndex(playerPositions.length)],
+                    rank: values[1][1] || playerRanks[randomizeIndex(playerRanks.length)],
+                    info: playerInfos[randomizeIndex(playerInfos.length)],
+                    image: playerImages[randomizeIndex(playerImages.length)]
                 }
-                this.setState({players: players})
             }
-        ).then(() => { console.log(this.state.isLoading); this.setState({isLoading: false})});
+            this.setState({players: players, isLoading: false})
+        });
     }
 
     matchPlayer = cardIndex => {
@@ -159,7 +155,6 @@ class Discovery extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FF0000'
     },
     card: {
         flex: 1,
@@ -171,12 +166,6 @@ const styles = StyleSheet.create({
     text: {
         textAlign: 'center',
         fontSize: 50,
-        backgroundColor: 'transparent'
-    },
-    done: {
-        textAlign: 'center',
-        fontSize: 30,
-        color: 'white',
         backgroundColor: 'transparent'
     },
     playerImage: {
