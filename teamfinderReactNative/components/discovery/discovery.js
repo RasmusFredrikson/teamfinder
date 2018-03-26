@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import {Button, Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import * as AsyncStorage from "react-native/Libraries/Storage/AsyncStorage";
 import {withNavigationFocus} from "react-navigation-is-focused-hoc";
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 
 function randomizeIndex(listLength) {
@@ -16,13 +16,8 @@ class Discovery extends Component {
         this.state = {
             isLoading: true,
             players: this.getPlayers(),
-            swipedAllCards: false,
-            swipeDirection: '',
-            isSwipingBack: false,
             cardIndex: 0,
-            selectedPosition: null,
-            selectedRank: null,
-            matchedPlayers: [{name:"test"}],
+            matchedPlayers: [{}],
         }
     }
 
@@ -31,8 +26,13 @@ class Discovery extends Component {
     };
 
     componentDidMount() {
-        console.log("Mounting");
         AsyncStorage.getItem('matchedPlayers').then((value) => this.setState({matchedPlayers: JSON.parse(value)}));
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (!this.props.isFocused && nextProps.isFocused) {
+            this.setState({isLoading: true, players: this.getPlayers()});
+        }
     }
 
     renderCard = player => {
@@ -48,72 +48,14 @@ class Discovery extends Component {
         )
     };
 
-    onSwipedAllCards = () => {
-        this.setState({
-            swipedAllCards: true
-        })
-    };
-
-    swipeBack = () => {
-        if (!this.state.isSwipingBack) {
-            this.setIsSwipingBack(true, () => {
-                this.swiper.swipeBack(() => {
-                    this.setIsSwipingBack(false)
-                })
-            })
-        }
-    };
-
-    setIsSwipingBack = (isSwipingBack, cb) => {
-        this.setState(
-            {
-                isSwipingBack: isSwipingBack
-            },
-            cb
-        )
-    };
-
-    componentWillReceiveProps(nextProps) {
-        if (!this.props.isFocused && nextProps.isFocused) {
-            this.setState({isLoading: true, players: this.getPlayers()});
-        }
-        if (this.props.isFocused && !nextProps.isFocused) {
-            // screen exit
-        }
-    }
-
-    // shouldComponentUpdate(nextProps) {
-    //     // Update only once after the screen disappears
-    //     if (this.props.isFocused && !nextProps.isFocused) {
-    //         console.log("Update only once after the screen disappears")
-    //         return true
-    //     }
-    //
-    //     // Don't update if the screen is not focused
-    //     if (!this.props.isFocused && !nextProps.isFocused) {
-    //         console.log("Don't update if the screen is not focused")
-    //         return false
-    //     }
-    //
-    //     // Update the screen if its re-enter
-    //     console.log("Update the screen if its re-enter")
-    //     return !this.props.isFocused && nextProps.isFocused
-    // }
-
     render() {
-        if (!this.props.isFocused) {
-            return null
+        if (!this.props.isFocused || this.state.isLoading) {
+            return null;
         }
-        if(this.state.isLoading) {
-            return <View><Text>Loading...</Text></View>;
-        }
+
         return (
             <View style={styles.container}>
                 <Swiper
-                    ref={swiper => {
-                        this.swiper = swiper
-                    }}
-                    onSwiped={this.onSwiped}
                     onSwipedRight={this.matchPlayer}
                     cards={this.state.players}
                     cardIndex={this.state.cardIndex}
@@ -121,7 +63,6 @@ class Discovery extends Component {
                     verticalSwipe={false}
                     swipeAnimationDuration={200}
                     renderCard={this.renderCard}
-                    onSwipedAll={this.onSwipedAllCards}
                     backgroundColor={'#FFFFFF'}
                     overlayLabels={{
                         left: {

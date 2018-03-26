@@ -53,13 +53,6 @@ export default class App extends Component {
         return (
             <TabNav
                 onNavigationStateChange={(prevState, currentState) => {
-                    // If you want to ignore the state changed from `DrawerNavigator`, use this:
-                    /*
-                      if (/^Drawer(Open|Close|Toggle)$/.test(getCurrentRouteKey(currentState)) === false) {
-                        updateFocus(currentState)
-                        return
-                      }
-                    */
                     updateFocus(currentState)
                 }}
             />

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Image, StyleSheet, Text, View} from "react-native";
 import * as AsyncStorage from "react-native/Libraries/Storage/AsyncStorage";
+import {withNavigationFocus} from "react-navigation-is-focused-hoc";
+import PropTypes from 'prop-types';
 
 
 const MatchedPlayer = ({matchedPlayer}) => {
@@ -19,16 +21,26 @@ const MatchedPlayer = ({matchedPlayer}) => {
     )
 };
 
-export default class Matches extends Component {
+class Matches extends Component {
     state = {
         matchedPlayers: "",
     };
 
-    componentDidMount() {
-        AsyncStorage.getItem('matchedPlayers').then((value) => this.setState({matchedPlayers: JSON.parse(value)}));
+    static propTypes = {
+        isFocused: PropTypes.bool.isRequired,
+    };
+
+    componentWillReceiveProps(nextProps) {
+        if (!this.props.isFocused && nextProps.isFocused) {
+            AsyncStorage.getItem('matchedPlayers').then((value) => this.setState({matchedPlayers: JSON.parse(value)}));
+        }
     }
 
     render() {
+        if (!this.props.isFocused) {
+            return null;
+        }
+
         return (
             <View style={styles.container}>
                 <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 1]}/>
@@ -71,3 +83,5 @@ const styles = StyleSheet.create({
         width: 100,
     }
 });
+
+export default withNavigationFocus(Matches)
