@@ -6,10 +6,6 @@ import {withNavigationFocus} from "react-navigation-is-focused-hoc";
 import PropTypes from 'prop-types';
 
 
-function randomizeIndex(listLength) {
-    return Math.floor((Math.random() * listLength));
-}
-
 class Discovery extends Component {
     constructor (props) {
         super(props);
@@ -111,6 +107,15 @@ class Discovery extends Component {
     }
 
     getPlayers() {
+        AsyncStorage.multiGet(['selectedPosition','selectedRank']).then((values) => {
+            this.populatePlayers(values[0][1],values[1][1]);
+        }).catch(() => {
+            this.populatePlayers();
+        });
+    }
+
+    populatePlayers(preferredPlayerPosition, preferredPlayerRank) {
+        let players = [];
         let playerNames = ["Snow", "Danette", "Ninja", "Nader", "Bomber", "Gunner", "FighTer", "MeD1c", "Pwner", "Muffins"];
         let playerRanks = ["I", "II", "III", "IV", "V"];
         let playerPositions = ["Top", "Jungle", "Mid", "AD-Carrier", "Support"];
@@ -129,25 +134,28 @@ class Discovery extends Component {
             require("../../img/katarina.jpeg"), require("../../img/poros.jpeg")
         ];
 
-        AsyncStorage.multiGet(['selectedPosition','selectedRank']).then((values) => {
-            let players = [];
-
-            for (let i = 0; i < 20; i++) {
-                players[i] = {
-                    id: i,
-                    name: playerNames[randomizeIndex(playerNames.length)],
-                    position: values[0][1] || playerPositions[randomizeIndex(playerPositions.length)],
-                    rank: values[1][1] || playerRanks[randomizeIndex(playerRanks.length)],
-                    info: playerInfos[randomizeIndex(playerInfos.length)],
-                    image: playerImages[randomizeIndex(playerImages.length)]
-                }
+        for (let i = 0; i < 20; i++) {
+            players[i] = {
+                id: i,
+                name: playerNames[this.randomizeIndex(playerNames.length)],
+                position: preferredPlayerPosition || playerPositions[this.randomizeIndex(playerPositions.length)],
+                rank: preferredPlayerRank || playerRanks[this.randomizeIndex(playerRanks.length)],
+                info: playerInfos[this.randomizeIndex(playerInfos.length)],
+                image: playerImages[this.randomizeIndex(playerImages.length)]
             }
-            this.setState({players: players, isLoading: false})
-        });
+        }
+        this.setState({players: players, isLoading: false})
+    }
+
+    randomizeIndex(listLength) {
+        return Math.floor((Math.random() * listLength));
     }
 
     matchPlayer = cardIndex => {
-        this.setState(prevState => ({matchedPlayers: [...prevState.matchedPlayers, prevState.players[cardIndex]]}));
+        if (!this.state.matchedPlayers)
+            this.setState({matchedPlayers: [this.state.players[cardIndex]]});
+        else
+            this.setState(prevState => ({matchedPlayers: [...prevState.matchedPlayers, prevState.players[cardIndex]]}));
         AsyncStorage.setItem("matchedPlayers", JSON.stringify(this.state.matchedPlayers));
     }
 }

@@ -41,6 +41,9 @@ class Matches extends Component {
             return null;
         }
 
+        if(!this.state.matchedPlayers)
+            return <View><Text>You have no matches so far :( </Text></View>
+
         return (
             <View style={styles.container}>
                 <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 1]}/>
