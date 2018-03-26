@@ -1,11 +1,11 @@
 package com.example.rasmus.teamfinder;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import static com.example.rasmus.teamfinder.MyProfileActivity.MY_DISCOVERY_SETTINGS;
 
-public class MatchesActivity extends AppCompatActivity {
+public class MatchesActivity extends Activity {
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

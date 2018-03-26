@@ -1,5 +1,6 @@
 package com.example.rasmus.teamfinder;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +9,6 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.MenuItem;
 
@@ -19,7 +19,7 @@ import java.util.Random;
 
 import static com.example.rasmus.teamfinder.MyProfileActivity.MY_DISCOVERY_SETTINGS;
 
-public class DiscoverActivity extends AppCompatActivity {
+public class DiscoverActivity extends Activity {
 
     private static final String[] playerNames = {"Snow", "Danette", "Ninja", "Nader", "Bomber", "Gunner", "FighTer", "MeD1c", "Pwner", "Muffins"};
     private static final String[] playerRanks = {"I", "II", "III", "IV", "V"};

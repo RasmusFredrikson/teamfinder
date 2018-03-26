@@ -11,8 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MyProfileActivity"
-            android:label="@string/title_profile">
+            android:name=".MyProfileActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,11 +19,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DiscoverActivity"
-            android:label="@string/title_discovery" />
+            android:name=".DiscoverActivity" />
         <activity
-            android:name=".MatchesActivity"
-            android:label="@string/title_matches"/>
+            android:name=".MatchesActivity"/>
 
         <provider
             android:name=".GenericFileProvider"

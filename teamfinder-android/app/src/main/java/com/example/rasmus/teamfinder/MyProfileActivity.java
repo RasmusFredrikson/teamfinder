@@ -1,22 +1,19 @@
 package com.example.rasmus.teamfinder;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
-public class MyProfileActivity extends AppCompatActivity {
+public class MyProfileActivity extends Activity {
 
     public static final String MY_DISCOVERY_SETTINGS = "MY_DISCOVERY_SETTINGS";
     ImageView profilePicture;
