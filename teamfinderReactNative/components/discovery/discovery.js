@@ -2,35 +2,37 @@ import React, {Component} from 'react'
 import {Button, Image, StyleSheet, Text, View} from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import * as AsyncStorage from "react-native/Libraries/Storage/AsyncStorage";
+import {withNavigationFocus} from "react-navigation-is-focused-hoc";
+import PropTypes from 'prop-types'
+
 
 function randomizeIndex(listLength) {
     return Math.floor((Math.random() * listLength));
 }
 
-export default class Discovery extends Component {
+class Discovery extends Component {
     constructor (props) {
         super(props);
         this.state = {
             isLoading: true,
-            cards: this.getPlayers(),
+            players: this.getPlayers(),
             swipedAllCards: false,
             swipeDirection: '',
             isSwipingBack: false,
             cardIndex: 0,
             selectedPosition: null,
-            selectedRank: null
+            selectedRank: null,
+            matchedPlayers: [{name:"test"}],
         }
     }
 
-    // componentDidMount() {
-    //     this.setState({isLoading: false});
-    // }
+    static propTypes = {
+        isFocused: PropTypes.bool.isRequired,
+    };
 
-    componentWillReceiveProps() {
-        this.setState({
-            cards: this.getPlayers(),
-            cardIndex: 0
-        })
+    componentDidMount() {
+        console.log("Mounting");
+        AsyncStorage.getItem('matchedPlayers').then((value) => this.setState({matchedPlayers: JSON.parse(value)}));
     }
 
     renderCard = player => {
@@ -71,16 +73,40 @@ export default class Discovery extends Component {
         )
     };
 
-    swipeLeft = () => {
-        this.swiper.swipeLeft()
-    };
+    componentWillReceiveProps(nextProps) {
+        if (!this.props.isFocused && nextProps.isFocused) {
+            this.setState({isLoading: true, players: this.getPlayers()});
+        }
+        if (this.props.isFocused && !nextProps.isFocused) {
+            // screen exit
+        }
+    }
 
-    render () {
+    // shouldComponentUpdate(nextProps) {
+    //     // Update only once after the screen disappears
+    //     if (this.props.isFocused && !nextProps.isFocused) {
+    //         console.log("Update only once after the screen disappears")
+    //         return true
+    //     }
+    //
+    //     // Don't update if the screen is not focused
+    //     if (!this.props.isFocused && !nextProps.isFocused) {
+    //         console.log("Don't update if the screen is not focused")
+    //         return false
+    //     }
+    //
+    //     // Update the screen if its re-enter
+    //     console.log("Update the screen if its re-enter")
+    //     return !this.props.isFocused && nextProps.isFocused
+    // }
+
+    render() {
+        if (!this.props.isFocused) {
+            return null
+        }
         if(this.state.isLoading) {
-            console.log("loading");
             return <View><Text>Loading...</Text></View>;
         }
-        console.log(this.state.cards);
         return (
             <View style={styles.container}>
                 <Swiper
@@ -88,9 +114,12 @@ export default class Discovery extends Component {
                         this.swiper = swiper
                     }}
                     onSwiped={this.onSwiped}
-                    cards={this.state.cards}
+                    onSwipedRight={this.matchPlayer}
+                    cards={this.state.players}
                     cardIndex={this.state.cardIndex}
                     cardVerticalMargin={80}
+                    verticalSwipe={false}
+                    swipeAnimationDuration={200}
                     renderCard={this.renderCard}
                     onSwipedAll={this.onSwipedAllCards}
                     backgroundColor={'#FFFFFF'}
@@ -154,15 +183,14 @@ export default class Discovery extends Component {
             "I just started playing games and don't really like it that much..."
         ];
         let playerImages = [
-            require("../..//img/amumu.jpeg"), require("../..//img/ashe.jpeg"), require("../..//img/darius.jpeg"), require("../..//img/jinx.jpeg"), require("../..//img/lux.jpeg"),
-            require("../..//img/teemo.jpeg"), require("../..//img/volibear.jpeg"), require("../..//img/annie.jpeg"), require("../..//img/braum.jpeg"), require("../..//img/karthus.jpg"),
-            require("../..//img/katarina.jpeg"), require("../..//img/poros.jpeg")
+            require("../../img/amumu.jpeg"), require("../../img/ashe.jpeg"), require("../../img/darius.jpeg"), require("../../img/jinx.jpeg"), require("../../img/lux.jpeg"),
+            require("../../img/teemo.jpeg"), require("../../img/volibear.jpeg"), require("../../img/annie.jpeg"), require("../../img/braum.jpeg"), require("../../img/karthus.jpg"),
+            require("../../img/katarina.jpeg"), require("../../img/poros.jpeg")
         ];
 
         let players = [];
-        let selectedPosition = "hej";
-        let selectedRank;
-
+        let selectedPosition, selectedRank;
+        console.log("hej");
         AsyncStorage.getItem('selectedPosition').then((value) => {
             selectedPosition = value;
         }).then(() => AsyncStorage.getItem('selectedRank').then((value) => selectedRank = value)).then(() => {
@@ -176,9 +204,14 @@ export default class Discovery extends Component {
                         image: playerImages[randomizeIndex(playerImages.length)]
                     }
                 }
-                this.setState({cards: players})
+                this.setState({players: players})
             }
-        ).then(() => { this.setState({isLoading: false})});
+        ).then(() => { console.log(this.state.isLoading); this.setState({isLoading: false})});
+    }
+
+    matchPlayer = cardIndex => {
+        this.setState(prevState => ({matchedPlayers: [...prevState.matchedPlayers, prevState.players[cardIndex]]}));
+        AsyncStorage.setItem("matchedPlayers", JSON.stringify(this.state.matchedPlayers));
     }
 }
 
@@ -212,3 +245,5 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 15
     }
 });
+
+export default withNavigationFocus(Discovery)

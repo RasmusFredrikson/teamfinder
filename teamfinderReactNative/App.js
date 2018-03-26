@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {Component}  from 'react';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import MyProfile from "./components/my-profile/my-profile";
 import Discovery from "./components/discovery/discovery";
 import {Image} from 'react-native';
+import Matches from "./components/matches/matches";
+import {updateFocus} from "react-navigation-is-focused-hoc";
 
 
-export default TabNavigator(
+const TabNav = TabNavigator(
     {
     Home: { screen: MyProfile },
-    Settings: { screen: Discovery },
+    Settings: { screen: Discovery},
+    Matches: { screen: Matches },
     },
     {
         navigationOptions: ({ navigation }) => ({
@@ -21,7 +24,8 @@ export default TabNavigator(
                 } else if (routeName === 'Settings') {
                     // iconName = `ios-options${focused ? '' : '-outline'}`;
                     iconName = require("./img/myprofile.png")
-                }
+                } else
+                    iconName = require("./img/myprofile.png")
 
                 // You can return any component that you like here! We usually use an
                 // icon component from react-native-vector-icons
@@ -36,5 +40,29 @@ export default TabNavigator(
         tabBarPosition: 'bottom',
         animationEnabled: false,
         swipeEnabled: false,
+        lazy: false,
     }
 );
+
+export default class App extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <TabNav
+                onNavigationStateChange={(prevState, currentState) => {
+                    // If you want to ignore the state changed from `DrawerNavigator`, use this:
+                    /*
+                      if (/^Drawer(Open|Close|Toggle)$/.test(getCurrentRouteKey(currentState)) === false) {
+                        updateFocus(currentState)
+                        return
+                      }
+                    */
+                    updateFocus(currentState)
+                }}
+            />
+        )
+    }
+}
