@@ -9,7 +9,6 @@ export default class MyProfile extends Component {
     };
 
     saveSelection(selectionBox) {
-        console.log(this);
         switch (selectionBox) {
             case "game":
                 localStorage.setItem('selectedGame', document.getElementById("game-select").value);

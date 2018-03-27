@@ -11,9 +11,24 @@ class App extends Component {
             <Router>
                 <div className="App">
                     <div className="navbar" id="myNavbar">
-                        <Link to="/">My Profile</Link>
-                        <Link to="/discovery">Discover</Link>
-                        <Link to="/matches">Matches</Link>
+                        <Link to="/"
+                              id="my-profile-link"
+                              onMouseEnter={() => this.switchColorOnFocusIn("my-profile")}
+                            onMouseLeave={() => this.switchColorOnFocusOut("my-profile")}>
+                            <img id="my-profile" src="img/my-profile.png"/>My Profile
+                        </Link>
+                        <Link to="/discovery"
+                              id="discovery-link"
+                              onMouseEnter={() => this.switchColorOnFocusIn("discovery")}
+                            onMouseLeave={() => this.switchColorOnFocusOut("discovery")}>
+                            <img id="discovery" src="img/discovery.png"/>Discover
+                        </Link>
+                        <Link to="/matches"
+                              id="matches-link"
+                              onMouseEnter={() => this.switchColorOnFocusIn("matches")}
+                              onMouseLeave={() => this.switchColorOnFocusOut("matches")}>
+                            <img id="matches" src="img/matches.png"/>Matches
+                        </Link>
                     </div>
                     <Route exact path="/" component={MyProfile} />
                     <Route path="/discovery" component={MyCards} />
@@ -21,6 +36,16 @@ class App extends Component {
                 </div>
             </Router>
         );
+    }
+
+    switchColorOnFocusIn(element) {
+        document.getElementById(element).setAttribute('src', `img/${element}-focus.png`);
+        document.getElementById(`${element}-link`).style.color = '#8B0000'
+    }
+
+    switchColorOnFocusOut(element) {
+        document.getElementById(element).setAttribute('src', `img/${element}.png`);
+        document.getElementById(`${element}-link`).style.color = 'grey'
     }
 }
 
