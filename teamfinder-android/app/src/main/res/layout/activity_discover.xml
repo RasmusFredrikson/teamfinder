@@ -10,7 +10,9 @@
     <com.mindorks.placeholderview.SwipePlaceHolderView
         android:id="@+id/swipeView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toTopOf="parent">
 
     </com.mindorks.placeholderview.SwipePlaceHolderView>
 
