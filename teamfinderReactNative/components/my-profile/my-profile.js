@@ -127,12 +127,12 @@ const styles = StyleSheet.create({
     },
     playerImage: {
         width: 300,
-        minHeight: 200,
-        marginTop: 50,
+        minHeight: 150,
+        marginTop: 80,
         maxHeight: 300
     },
     playerName: {
-        marginTop: 10,
+        marginTop: 20,
         fontSize: 24,
     },
     pickerWrapper: {
@@ -140,20 +140,23 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#AAAAAA',
         borderStyle: 'solid',
-        width: 250,
+        width: 300,
         marginBottom:20
     },
     picker: {
-        height:40,
+        height:35,
     },
     discoverySettings: {
         marginTop: 20,
         justifyContent: 'flex-start',
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
     },
     discoverySettingsHeader: {
         fontWeight: 'bold',
         fontSize: 18,
+        color: '#000',
+        marginTop: 10,
+        marginBottom: 5,
     }
 });
 

@@ -9,31 +9,38 @@ import {updateFocus} from "react-navigation-is-focused-hoc";
 
 const TabNav = TabNavigator(
     {
-    Home: { screen: MyProfile },
-    Settings: { screen: Discovery},
-    Matches: { screen: Matches },
+        MyProfile: { screen: MyProfile },
+        Discovery: { screen: Discovery},
+        Matches: { screen: Matches },
     },
     {
         navigationOptions: ({ navigation }) => ({
             tabBarIcon: ({ focused, tintColor }) => {
                 const { routeName } = navigation.state;
                 let iconName;
-                if (routeName === 'Home') {
-                    // iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-                    iconName = require("./img/discovery.png");
-                } else if (routeName === 'Settings') {
-                    // iconName = `ios-options${focused ? '' : '-outline'}`;
-                    iconName = require("./img/my-profile.png");
+                if (routeName === 'MyProfile') {
+                    if (focused)
+                        iconName = require("./img/my-profile-focus.png");
+                    else
+                        iconName = require("./img/my-profile.png");
+                } else if (routeName === 'Discovery') {
+                    if (focused)
+                        iconName = require("./img/discovery-focus.png");
+                    else
+                        iconName = require("./img/discovery.png");
                 } else
-                    iconName = require("./img/matches.png");
+                    if (focused)
+                        iconName = require("./img/matches-focus.png");
+                    else
+                        iconName = require("./img/matches.png");
 
                 // You can return any component that you like here! We usually use an
                 // icon component from react-native-vector-icons
-                return <Image source={iconName} style={{width:25, height: 20}} />;
+                return <Image source={iconName} style={{width:25, height: 22}} />;
             },
         }),
         tabBarOptions: {
-            activeTintColor: 'tomato',
+            activeTintColor: '#8B0000',
             inactiveTintColor: 'gray',
         },
         tabBarComponent: TabBarBottom,
@@ -41,6 +48,7 @@ const TabNav = TabNavigator(
         animationEnabled: false,
         swipeEnabled: false,
         lazy: false,
+        barHeight: '100px',
     }
 );
 
