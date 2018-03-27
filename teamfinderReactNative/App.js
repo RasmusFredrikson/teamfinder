@@ -20,12 +20,12 @@ const TabNav = TabNavigator(
                 let iconName;
                 if (routeName === 'Home') {
                     // iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-                    iconName = require("./img/home.png")
+                    iconName = require("./img/discovery.png");
                 } else if (routeName === 'Settings') {
                     // iconName = `ios-options${focused ? '' : '-outline'}`;
-                    iconName = require("./img/myprofile.png")
+                    iconName = require("./img/my-profile.png");
                 } else
-                    iconName = require("./img/myprofile.png")
+                    iconName = require("./img/matches.png");
 
                 // You can return any component that you like here! We usually use an
                 // icon component from react-native-vector-icons

@@ -15,19 +15,19 @@ class App extends Component {
                               id="my-profile-link"
                               onMouseEnter={() => this.switchColorOnFocusIn("my-profile")}
                             onMouseLeave={() => this.switchColorOnFocusOut("my-profile")}>
-                            <img id="my-profile" src="img/my-profile.png"/>My Profile
+                            <img alt="my-profile" id="my-profile" src="img/my-profile.png"/>My Profile
                         </Link>
                         <Link to="/discovery"
                               id="discovery-link"
                               onMouseEnter={() => this.switchColorOnFocusIn("discovery")}
                             onMouseLeave={() => this.switchColorOnFocusOut("discovery")}>
-                            <img id="discovery" src="img/discovery.png"/>Discover
+                            <img alt="discovery" id="discovery" src="img/discovery.png"/>Discover
                         </Link>
                         <Link to="/matches"
                               id="matches-link"
                               onMouseEnter={() => this.switchColorOnFocusIn("matches")}
                               onMouseLeave={() => this.switchColorOnFocusOut("matches")}>
-                            <img id="matches" src="img/matches.png"/>Matches
+                            <img alt="matches" id="matches" src="img/matches.png"/>Matches
                         </Link>
                     </div>
                     <Route exact path="/" component={MyProfile} />
@@ -40,12 +40,19 @@ class App extends Component {
 
     switchColorOnFocusIn(element) {
         document.getElementById(element).setAttribute('src', `img/${element}-focus.png`);
-        document.getElementById(`${element}-link`).style.color = '#8B0000'
+        document.getElementById(element).style.maxHeight = '24px';
+        document.getElementById(element).style.maxWidth = '28px';
+        document.getElementById(`${element}-link`).style.color = '#8B0000';
+        document.getElementById(`${element}-link`).style.fontSize = '14px';
     }
 
     switchColorOnFocusOut(element) {
         document.getElementById(element).setAttribute('src', `img/${element}.png`);
-        document.getElementById(`${element}-link`).style.color = 'grey'
+        document.getElementById(element).style.maxHeight = '22px';
+        document.getElementById(element).style.maxWidth = '26px';
+        document.getElementById(`${element}-link`).style.color = 'grey';
+        document.getElementById(`${element}-link`).style.fontSize = '12px';
+
     }
 }
 
