@@ -52,26 +52,26 @@ public class MatchesActivity extends Activity {
         Gson gson = new Gson();
         ArrayList<TextView> playerNames = new ArrayList<TextView>() {{
             add((TextView) findViewById(R.id.playerName1)); add((TextView) findViewById(R.id.playerName2)); add((TextView) findViewById(R.id.playerName3));
-            add((TextView) findViewById(R.id.playerName4)); add((TextView) findViewById(R.id.playerName5));
+            add((TextView) findViewById(R.id.playerName4)); add((TextView) findViewById(R.id.playerName5)); add((TextView) findViewById(R.id.playerName6));
         }};
         ArrayList<TextView> playerPositions = new ArrayList<TextView>() {{
             add((TextView) findViewById(R.id.playerPosition1)); add((TextView) findViewById(R.id.playerPosition2)); add((TextView) findViewById(R.id.playerPosition3));
-            add((TextView) findViewById(R.id.playerPosition4)); add((TextView) findViewById(R.id.playerPosition5));
+            add((TextView) findViewById(R.id.playerPosition4)); add((TextView) findViewById(R.id.playerPosition5)); add((TextView) findViewById(R.id.playerPosition6));
         }};
         ArrayList<TextView> playerRanks = new ArrayList<TextView>() {{
             add((TextView) findViewById(R.id.playerRank1)); add((TextView) findViewById(R.id.playerRank2)); add((TextView) findViewById(R.id.playerRank3));
-            add((TextView) findViewById(R.id.playerRank4)); add((TextView) findViewById(R.id.playerRank5));
+            add((TextView) findViewById(R.id.playerRank4)); add((TextView) findViewById(R.id.playerRank5)); add((TextView) findViewById(R.id.playerRank6));
         }};
         //ArrayList<TextView> playerInfos = findViewById(R.id.playerInfo);
         ArrayList<ImageView> playerImages = new ArrayList<ImageView>() {{
             add((ImageView) findViewById(R.id.playerImage1)); add((ImageView) findViewById(R.id.playerImage2)); add((ImageView) findViewById(R.id.playerImage3));
-            add((ImageView) findViewById(R.id.playerImage4)); add((ImageView) findViewById(R.id.playerImage5));
+            add((ImageView) findViewById(R.id.playerImage4)); add((ImageView) findViewById(R.id.playerImage5)); add((ImageView) findViewById(R.id.playerImage6));
         }};
         String json = prefs.getString("matchedPlayers","");
         ArrayList<Player> matchedPlayers = gson.fromJson(json, new TypeToken<ArrayList<Player>>(){}.getType());
 
         int j = 0;
-        for (int i = matchedPlayers.size() - 1; i >= 0 && i >= matchedPlayers.size() - 5; i--) {
+        for (int i = matchedPlayers.size() - 1; i >= 0 && i >= matchedPlayers.size() - 6; i--) {
             playerNames.get(j).setText(matchedPlayers.get(i).getName());
             playerPositions.get(j).setText(matchedPlayers.get(i).getPosition());
             playerRanks.get(j).setText(String.format(getResources().getString(R.string.rank_placeholder), matchedPlayers.get(i).getRank()));
