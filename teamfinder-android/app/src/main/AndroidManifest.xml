@@ -13,17 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MyProfileActivity">
+            android:name=".MyProfileActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".DiscoverActivity" />
+            android:name=".DiscoverActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".MatchesActivity"/>
+            android:name=".MatchesActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name=".GenericFileProvider"
