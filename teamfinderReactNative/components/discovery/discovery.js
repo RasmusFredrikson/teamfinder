@@ -4,6 +4,7 @@ import Swiper from 'react-native-deck-swiper';
 import * as AsyncStorage from "react-native/Libraries/Storage/AsyncStorage";
 import {withNavigationFocus} from "react-navigation-is-focused-hoc";
 import PropTypes from 'prop-types';
+import * as Vibration from "react-native/Libraries/Vibration/Vibration";
 
 
 class Discovery extends Component {
@@ -154,11 +155,14 @@ class Discovery extends Component {
     }
 
     matchPlayer = cardIndex => {
-        if (!this.state.matchedPlayers)
-            this.setState({matchedPlayers: [this.state.players[cardIndex]]});
-        else
-            this.setState(prevState => ({matchedPlayers: [...prevState.matchedPlayers, prevState.players[cardIndex]]}));
-        AsyncStorage.setItem("matchedPlayers", JSON.stringify(this.state.matchedPlayers));
+        if (this.randomizeIndex(10) > 5) {
+            Vibration.vibrate(300);
+            if (!this.state.matchedPlayers)
+                this.setState({matchedPlayers: [this.state.players[cardIndex]]});
+            else
+                this.setState(prevState => ({matchedPlayers: [...prevState.matchedPlayers, prevState.players[cardIndex]]}));
+            AsyncStorage.setItem("matchedPlayers", JSON.stringify(this.state.matchedPlayers));
+        }
     }
 }
 
