@@ -10,9 +10,9 @@ const MatchedPlayer = ({matchedPlayer}) => {
         <div className="matchedPlayer">
             <img alt={matchedPlayer.image} src={`img/${matchedPlayer.image}`}/>
             <div className="playerInfo">
-                <span className="playerName">{matchedPlayer.name}</span>
-                <span>Rank {matchedPlayer.rank}</span>
-                <span>{matchedPlayer.position}</span>
+                <div className="playerName">{matchedPlayer.name}</div>
+                <div>Rank {matchedPlayer.rank}</div>
+                <div>{matchedPlayer.position}</div>
             </div>
         </div>
     )
@@ -31,6 +31,7 @@ export default class Matches extends Component {
                 <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 3]}/>
                 <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 4]}/>
                 <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 5]}/>
+                <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 6]}/>
             </div>
         )
     }

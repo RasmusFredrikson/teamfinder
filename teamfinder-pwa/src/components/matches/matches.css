@@ -1,26 +1,33 @@
 .matchedPlayer {
     display: inline-block;
-    margin-top: 50px;
+    margin-top: 35px;
+    padding-bottom: 15px;
     margin-left: 20px;
     float: left;
+    border-bottom: solid #DDDDDD 1px;
 }
 
 .playerInfo {
+    text-align: left;
     display: inline-block;
     vertical-align: top;
-    padding-top: 13px;
+    padding-top: 15px;
 }
 
 .matchedPlayer img {
+    width: 90px;
     max-height: 80px;
-    max-width: 80px;
+    border-radius: 90px;
 }
 
-.matchedPlayer span {
+.playerInfo div {
+    width: 90px;
     margin-top: 0;
-    padding-left: 20px;
+    display: inline-block;
 }
 
-.playerName {
+.playerInfo .playerName {
     font-weight: bold;
+    padding-left: 30px;
+    width: 80px;
 }

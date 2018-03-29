@@ -51,6 +51,7 @@ class Matches extends Component {
                 <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 3]}/>
                 <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 4]}/>
                 <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 5]}/>
+                <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 6]}/>
             </View>
         )
     }
@@ -59,31 +60,41 @@ class Matches extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 60,
         paddingLeft: 20,
+        marginTop: 10,
     },
     playerInfo: {
-        paddingTop: 20,
+        paddingTop: 15,
         flexWrap: 'wrap',
         alignItems: 'flex-start',
         flexDirection:'row',
     },
     text: {
+        width: 90,
         paddingLeft: 30,
+        color: 'black',
+        fontSize: 16,
     },
     name: {
+        width: 90,
         paddingLeft: 30,
         fontWeight: 'bold',
+        color: 'black',
+        fontSize: 16,
     },
     matchedPlayer: {
-        paddingBottom: 40,
+        marginTop: 35,
+        paddingBottom: 15,
         flexWrap: 'wrap',
         alignItems: 'flex-start',
         flexDirection:'row',
+        borderBottomWidth: 1,
+        borderBottomColor: '#DDDDDD'
     },
     playerImage: {
-        maxHeight: 60,
-        width: 100,
+        maxHeight: 50,
+        width: 90,
+        borderRadius: 90,
     }
 });
 
