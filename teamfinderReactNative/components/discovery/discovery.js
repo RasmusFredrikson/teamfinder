@@ -35,10 +35,10 @@ class Discovery extends Component {
         return (
             <View style={styles.card}>
                 <Image style={styles.playerImage} source={player.image}/>
-                <View>
-                    <Text>{player.name}, Rank {player.rank}</Text>
-                    <Text>Position: {player.position}</Text>
-                    <Text>{player.info}</Text>
+                <View style={styles.playerContainer}>
+                    <Text style={styles.playerName}>{player.name}, Rank {player.rank}</Text>
+                    <Text style={styles.playerPosition}>Position: {player.position}</Text>
+                    <Text style={styles.playerInfo}>{player.info}</Text>
                 </View>
             </View>
         )
@@ -187,6 +187,23 @@ const styles = StyleSheet.create({
         height: 300,
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25
+    },
+    playerInfo: {
+        paddingTop: 5,
+        fontSize: 14,
+        color: 'black',
+    },
+    playerName: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: 'black',
+    },
+    playerPosition: {
+        fontSize: 18,
+        color: 'black',
+    },
+    playerContainer: {
+        padding: 20,
     }
 });
 
