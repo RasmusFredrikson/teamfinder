@@ -3,6 +3,9 @@ package com.example.rasmus.teamfinder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -127,26 +130,32 @@ public class PlayerCard {
     private void matchPlayer() {
 
         Random r = new Random();
-        if (r.nextInt(10) > 4) {
-        SharedPreferences.Editor editor = mDiscoverySettings.edit();
-        Gson gson = new Gson();
+        if (r.nextInt(10) > 5) {
+            Vibrator v = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+            // Vibrate for 500 milliseconds
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                v.vibrate(VibrationEffect.createOneShot(300,VibrationEffect.DEFAULT_AMPLITUDE));
+            }else{
+                //deprecated in API 26
+                v.vibrate(300);
+            }
 
-        String json = mDiscoverySettings.getString("matchedPlayers", "");
-        ArrayList<Player> updatedMatchedPlayerNames;
-        if (!json.equals("")) {
-            ArrayList<Player> previouslyMatchedPlayerNames = gson.fromJson(json,new TypeToken<ArrayList<Player>>(){}.getType());
-            updatedMatchedPlayerNames = new ArrayList<>(previouslyMatchedPlayerNames);
-        } else
-            updatedMatchedPlayerNames = new ArrayList<>();
+            SharedPreferences.Editor editor = mDiscoverySettings.edit();
+            Gson gson = new Gson();
 
-        updatedMatchedPlayerNames.add(mPlayer);
+            String json = mDiscoverySettings.getString("matchedPlayers", "");
+            ArrayList<Player> updatedMatchedPlayerNames;
+            if (!json.equals("")) {
+                ArrayList<Player> previouslyMatchedPlayerNames = gson.fromJson(json,new TypeToken<ArrayList<Player>>(){}.getType());
+                updatedMatchedPlayerNames = new ArrayList<>(previouslyMatchedPlayerNames);
+            } else
+                updatedMatchedPlayerNames = new ArrayList<>();
 
-        json = gson.toJson(updatedMatchedPlayerNames);
-        editor.putString("matchedPlayers", json);
-        editor.apply();
+            updatedMatchedPlayerNames.add(mPlayer);
 
-            Intent matchIntent = new Intent(mContext, MatchesActivity.class);
-            mContext.startActivity(matchIntent);
+            json = gson.toJson(updatedMatchedPlayerNames);
+            editor.putString("matchedPlayers", json);
+            editor.apply();
         }
     }
 }

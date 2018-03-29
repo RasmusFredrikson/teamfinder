@@ -79,7 +79,8 @@ export default class MyCards extends Component {
         this.state.turn++;
     };
     onSwipeRight = () => {
-        if (randomizeIndex(10) > 6) {
+        if (randomizeIndex(10) > 5) {
+            navigator.vibrate(300);
             this.setState(prevState => ({matched: [...prevState.matched, prevState.players[this.state.turn]]}));
             localStorage.setItem("matchedPlayers", JSON.stringify(this.state.matched));
         }
