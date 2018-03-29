@@ -15,7 +15,7 @@ class App extends Component {
                               id="my-profile-link"
                               onMouseEnter={() => this.switchColorOnFocusIn("my-profile")}
                             onMouseLeave={() => this.switchColorOnFocusOut("my-profile")}>
-                            <img alt="my-profile" id="my-profile" src="img/my-profile.png"/>My Profile
+                            <img alt="my-profile" id="my-profile" src="img/my-profile-focus.png"/>My Profile
                         </Link>
                         <Link to="/discovery"
                               id="discovery-link"
@@ -39,17 +39,14 @@ class App extends Component {
     }
 
     switchColorOnFocusIn(element) {
+        this.switchColorOnFocusOut("my-profile");
         document.getElementById(element).setAttribute('src', `img/${element}-focus.png`);
-        document.getElementById(element).style.maxHeight = '24px';
-        document.getElementById(element).style.maxWidth = '28px';
         document.getElementById(`${element}-link`).style.color = '#8B0000';
         document.getElementById(`${element}-link`).style.fontSize = '14px';
     }
 
     switchColorOnFocusOut(element) {
         document.getElementById(element).setAttribute('src', `img/${element}.png`);
-        document.getElementById(element).style.maxHeight = '22px';
-        document.getElementById(element).style.maxWidth = '26px';
         document.getElementById(`${element}-link`).style.color = 'grey';
         document.getElementById(`${element}-link`).style.fontSize = '12px';
 

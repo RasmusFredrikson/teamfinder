@@ -5,6 +5,7 @@ html {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    /*overflow: hidden;*/
 }
 
 body {
@@ -25,7 +26,7 @@ h1, h2 {
 .master-root {
     min-height: 660px;
     max-height: 660px;
-    width: 100%;
+    width: 99%;
     overflow: hidden;
     border: 1px solid #e5e5e5;
 }
@@ -37,11 +38,11 @@ h1, h2 {
     background: white;
     height: 80%;
     margin: 0;
+    border: solid #AAAAAA 1px;
     transition: box-shadow .3s;
-    box-shadow: 1px 15px 20px rgba(0,0,0,0.40), 0 6px 6px rgba(0,0,0,0.23);
+    box-shadow: 2px 5px 5px rgba(0,0,0,0.01);
     cursor: pointer;
-    border-radius: 15px;
-    width: 90%;
+    border-radius: 25px;
 }
 
 .card-content {
@@ -51,27 +52,36 @@ h1, h2 {
 
 .card-content img {
     width: 100%;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    height: 50%;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
 }
 
 .player-info {
     text-align: left;
-    padding-left: 15px;
+    padding-left: 20px;
+    margin-top: 20px;
 }
 
 .card-content h1 {
-    font-weight: 400;
+    font-weight: 700;
     font-size: 20px;
+    padding: 0;
+    margin: 0;
 }
 
 .card-content h2 {
-    font-weight: 300;
+    font-weight: 400;
     font-size: 18px;
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .card-content p {
-    font-size: 16px;
+    padding-top: 5px;
+    font-size: 14px;
+    font-weight: normal;
 }
 
 .animate {

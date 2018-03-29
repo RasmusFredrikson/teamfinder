@@ -48,7 +48,6 @@ const TabNav = TabNavigator(
         animationEnabled: false,
         swipeEnabled: false,
         lazy: false,
-        barHeight: '100px',
     }
 );
 
