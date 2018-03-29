@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import Cards, { Card } from 'react-swipe-card'
 import './myCards.css';
 
-
+const CustomAlertLeft = () => <span>NOPE</span>
+const CustomAlertRight = () => <span>LIKE</span>
 
 const Wrapper = ({data: players, onSwipeLeft, onSwipeRight}) => {
 
     return (
-        <Cards className='master-root'>
+        <Cards
+            alertRight={<CustomAlertRight />}
+            alertLeft={<CustomAlertLeft />}
+            className='master-root'>
             {players.map(player => {
                 return (
                     <Card
