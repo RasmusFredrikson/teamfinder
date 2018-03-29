@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TeamFinder</string>
+    <string name="app_name">Teamfinder</string>
     <string name="title_discovery">Discovery</string>
     <string name="title_profile">My Profile</string>
     <string name="title_matches">Matches</string>

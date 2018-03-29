@@ -88,13 +88,10 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         alignItems: 'flex-start',
         flexDirection:'row',
-        borderBottomWidth: 1,
-        borderBottomColor: '#DDDDDD'
     },
     playerImage: {
         maxHeight: 50,
         width: 90,
-        borderRadius: 90,
     }
 });
 

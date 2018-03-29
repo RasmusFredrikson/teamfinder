@@ -4,7 +4,6 @@
     padding-bottom: 15px;
     margin-left: 20px;
     float: left;
-    border-bottom: solid #DDDDDD 1px;
 }
 
 .playerInfo {
@@ -17,7 +16,6 @@
 .matchedPlayer img {
     width: 90px;
     max-height: 80px;
-    border-radius: 90px;
 }
 
 .playerInfo div {
