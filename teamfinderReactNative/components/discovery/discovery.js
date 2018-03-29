@@ -55,27 +55,30 @@ class Discovery extends Component {
                     onSwipedRight={this.matchPlayer}
                     cards={this.state.players}
                     cardIndex={this.state.cardIndex}
-                    cardVerticalMargin={80}
+                    cardVerticalMargin={40}
+                    cardHorizontalMargin={13}
                     verticalSwipe={false}
                     swipeAnimationDuration={200}
                     renderCard={this.renderCard}
                     backgroundColor={'#FFFFFF'}
+                    stackSize={3}
+                    stackSeparation={1}
+                    stackScale={0.5}
                     overlayLabels={{
                         left: {
                             title: 'NOPE',
                             style: {
                                 label: {
-                                    backgroundColor: 'black',
-                                    borderColor: 'black',
-                                    color: 'white',
-                                    borderWidth: 1
+                                    backgroundColor: 'transparent',
+                                    color: '#e50000',
                                 },
                                 wrapper: {
                                     flexDirection: 'column',
                                     alignItems: 'flex-end',
                                     justifyContent: 'flex-start',
                                     marginTop: 30,
-                                    marginLeft: -30
+                                    marginLeft: -30,
+                                    elevation: 6,
                                 }
                             }
                         },
@@ -83,17 +86,16 @@ class Discovery extends Component {
                             title: 'LIKE',
                             style: {
                                 label: {
-                                    backgroundColor: 'black',
-                                    borderColor: 'black',
-                                    color: 'white',
-                                    borderWidth: 1
+                                    backgroundColor: 'transparent',
+                                    color: '#00b200',
                                 },
                                 wrapper: {
                                     flexDirection: 'column',
                                     alignItems: 'flex-start',
                                     justifyContent: 'flex-start',
                                     marginTop: 30,
-                                    marginLeft: 30
+                                    marginLeft: 30,
+                                    elevation: 6,
                                 }
                             }
                         }
@@ -165,11 +167,15 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     card: {
+        marginTop: 0,
+        marginBottom: 80,
         flex: 1,
-        borderRadius: 15,
-        borderWidth: 2,
+        borderWidth: 0.5,
         borderColor: '#AAAAAA',
+        borderRadius: 25,
         backgroundColor: 'white',
+        elevation: 5
+
     },
     text: {
         textAlign: 'center',
@@ -177,10 +183,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent'
     },
     playerImage: {
-        width: 368,
+        width: 385,
         height: 300,
-        borderTopLeftRadius: 15,
-        borderTopRightRadius: 15
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25
     }
 });
 
