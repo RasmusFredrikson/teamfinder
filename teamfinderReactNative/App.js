@@ -1,17 +1,22 @@
 import React, {Component}  from 'react';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
-import MyProfile from "./components/my-profile/my-profile";
-import Discovery from "./components/discovery/discovery";
+import {TabNavigator, TabBarBottom, StackNavigator} from 'react-navigation';
+import MyProfile from "./components/my-profile/My-profile";
+import Discovery from "./components/discovery/Discovery";
 import {Image} from 'react-native';
-import Matches from "./components/matches/matches";
+import Matches from "./components/matches/Matches";
 import {updateFocus} from "react-navigation-is-focused-hoc";
+import SelectedMatch from "./components/matches/SelectedMatch";
 
+const MatchesStack = StackNavigator({
+    Matches: { screen: Matches },
+    SelectedMatch: { screen: SelectedMatch },
+});
 
 const TabNav = TabNavigator(
     {
         MyProfile: { screen: MyProfile },
         Discovery: { screen: Discovery},
-        Matches: { screen: Matches },
+        Matches: { screen: MatchesStack },
     },
     {
         navigationOptions: ({ navigation }) => ({
@@ -29,10 +34,10 @@ const TabNav = TabNavigator(
                     else
                         iconName = require("./img/discovery.png");
                 } else
-                    if (focused)
-                        iconName = require("./img/matches-focus.png");
-                    else
-                        iconName = require("./img/matches.png");
+                if (focused)
+                    iconName = require("./img/matches-focus.png");
+                else
+                    iconName = require("./img/matches.png");
 
                 // You can return any component that you like here! We usually use an
                 // icon component from react-native-vector-icons

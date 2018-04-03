@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -62,7 +63,6 @@ public class MatchesActivity extends Activity {
             add((TextView) findViewById(R.id.playerRank1)); add((TextView) findViewById(R.id.playerRank2)); add((TextView) findViewById(R.id.playerRank3));
             add((TextView) findViewById(R.id.playerRank4)); add((TextView) findViewById(R.id.playerRank5)); add((TextView) findViewById(R.id.playerRank6));
         }};
-        //ArrayList<TextView> playerInfos = findViewById(R.id.playerInfo);
         ArrayList<ImageView> playerImages = new ArrayList<ImageView>() {{
             add((ImageView) findViewById(R.id.playerImage1)); add((ImageView) findViewById(R.id.playerImage2)); add((ImageView) findViewById(R.id.playerImage3));
             add((ImageView) findViewById(R.id.playerImage4)); add((ImageView) findViewById(R.id.playerImage5)); add((ImageView) findViewById(R.id.playerImage6));
@@ -73,16 +73,33 @@ public class MatchesActivity extends Activity {
         int j = 0;
         for (int i = matchedPlayers.size() - 1; i >= 0 && i >= matchedPlayers.size() - 6; i--) {
             playerNames.get(j).setText(matchedPlayers.get(i).getName());
+            playerNames.get(j).setOnClickListener(getPlayerDetailOnClick(i));
+
             playerPositions.get(j).setText(matchedPlayers.get(i).getPosition());
+            playerPositions.get(j).setOnClickListener(getPlayerDetailOnClick(i));
+
             playerRanks.get(j).setText(String.format(getResources().getString(R.string.rank_placeholder), matchedPlayers.get(i).getRank()));
-            //playerInfos.get(j).setText(matchedPlayers.get(i).getInfo());
+            playerRanks.get(j).setOnClickListener(getPlayerDetailOnClick(i));
+
             playerImages.get(j).setImageResource(matchedPlayers.get(i).getImageRes());
+            playerImages.get(j).setOnClickListener(getPlayerDetailOnClick(i));
             j++;
         }
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_matches);
+    }
+
+    View.OnClickListener getPlayerDetailOnClick(final int playerIndex) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent selectedMatchIntent = new Intent(getApplicationContext(), SelectedMatchActivity.class);
+                selectedMatchIntent.putExtra("PLAYER_INDEX", playerIndex);
+                startActivity(selectedMatchIntent);
+            }
+        };
     }
 
 }

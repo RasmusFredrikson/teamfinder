@@ -43,4 +43,5 @@
     </string-array>
     <string name="title_activity_matches">MatchesActivity</string>
     <string name="pick_image_intent_text">Select a method</string>
+    <string name="title_activity_selected_match">Matched Player</string>
 </resources>
