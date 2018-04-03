@@ -1,29 +1,35 @@
 import React, { Component } from 'react';
-import {Image, StyleSheet, Text, View} from "react-native";
+import {Button, Image, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View} from "react-native";
 import * as AsyncStorage from "react-native/Libraries/Storage/AsyncStorage";
 import {withNavigationFocus} from "react-navigation-is-focused-hoc";
 import PropTypes from 'prop-types';
 
 
-const MatchedPlayer = ({matchedPlayer}) => {
+const MatchedPlayer = ({props, matchedPlayer}) => {
     if (!matchedPlayer) {
         return <View/>;
     }
     return (
-        <View style={styles.matchedPlayer}>
-            <Image style={styles.playerImage} source={matchedPlayer.image}/>
-            <View style={styles.playerInfo}>
-                <Text style={styles.name} className="playerName">{matchedPlayer.name}</Text>
-                <Text style={styles.text} >Rank {matchedPlayer.rank}</Text>
-                <Text style={styles.text} >{matchedPlayer.position}</Text>
+        <TouchableOpacity activeOpacity={1} onPress={() => props.navigation.navigate('SelectedMatch', {player: matchedPlayer})}>
+            <View style={styles.matchedPlayer}>
+                <Image style={styles.playerImage} source={matchedPlayer.image}/>
+                <View style={styles.playerInfo}>
+                    <Text style={styles.name} >{matchedPlayer.name}</Text>
+                    <Text style={styles.text} >Rank {matchedPlayer.rank}</Text>
+                    <Text style={styles.text} >{matchedPlayer.position}</Text>
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 };
 
 class Matches extends Component {
     state = {
         matchedPlayers: "",
+    };
+
+    static navigationOptions = {
+        header: null,
     };
 
     static propTypes = {
@@ -46,12 +52,12 @@ class Matches extends Component {
 
         return (
             <View style={styles.container}>
-                <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 1]}/>
-                <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 2]}/>
-                <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 3]}/>
-                <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 4]}/>
-                <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 5]}/>
-                <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 6]}/>
+                <MatchedPlayer props={this.props} matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 1]}/>
+                <MatchedPlayer props={this.props} matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 2]}/>
+                <MatchedPlayer props={this.props} matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 3]}/>
+                <MatchedPlayer props={this.props} matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 4]}/>
+                <MatchedPlayer props={this.props} matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 5]}/>
+                <MatchedPlayer props={this.props} matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 6]}/>
             </View>
         )
     }
