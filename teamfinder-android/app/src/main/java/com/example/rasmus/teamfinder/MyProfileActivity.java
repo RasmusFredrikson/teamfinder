@@ -4,14 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import java.io.ByteArrayOutputStream;
 
 public class MyProfileActivity extends Activity {
 
@@ -90,6 +94,11 @@ public class MyProfileActivity extends Activity {
             gameDropdown.setSelection(prefs.getInt("gameIndex",0));
             positionDropdown.setSelection(prefs.getInt("positionIndex",0));
             rankDropdown.setSelection(prefs.getInt("rankIndex",0));
+
+            if (prefs.getString("selectedImage", null) != null) {
+                byte[] imageAsBytes = Base64.decode(prefs.getString("selectedImage", null).getBytes(), Base64.DEFAULT);
+                profilePicture.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
+            }
         }
     }
 
@@ -100,6 +109,14 @@ public class MyProfileActivity extends Activity {
             case 123:
                 Bitmap bitmap = ImagePicker.getImageFromResult(this, resultCode, data);
                 profilePicture.setImageBitmap(bitmap);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos); //bm is the bitmap object
+                byte[] b = baos.toByteArray();
+                String encoded = Base64.encodeToString(b, Base64.DEFAULT);
+
+                SharedPreferences.Editor editor = getSharedPreferences(MY_DISCOVERY_SETTINGS, MODE_PRIVATE).edit();
+                editor.putString("selectedImage", encoded);
+                editor.apply();
                 break;
             default:
                 super.onActivityResult(requestCode, resultCode, data);

@@ -2,11 +2,20 @@ import React, { Component } from 'react';
 import './myProfile.css';
 
 export default class MyProfile extends Component {
-    state = {
-        selectedGame: localStorage.getItem('selectedGame') || "",
-        selectedPosition: localStorage.getItem('selectedPosition') || "",
-        selectedRank: localStorage.getItem('selectedRank') || ""
-    };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            selectedImage: localStorage.getItem('selectedImage') || "img/annie.jpeg",
+            selectedGame: localStorage.getItem('selectedGame') || "",
+            selectedPosition: localStorage.getItem('selectedPosition') || "",
+            selectedRank: localStorage.getItem('selectedRank') || ""
+        };
+
+        this.setSelectedImage = this.setSelectedImage.bind(this);
+    }
+
 
     saveSelection(selectionBox) {
         switch (selectionBox) {
@@ -31,7 +40,7 @@ export default class MyProfile extends Component {
         return (
             <div>
                 <input type="file" accept="image/*" id="selectImage" onChange={this.setSelectedImage}/>
-                <img alt="Profile" src="img/annie.jpeg" id="outImage" onClick={this.clickSelectImage}/>
+                <img alt="Profile" src={this.state.selectedImage} id="outImage" onClick={this.clickSelectImage}/>
                 <div className="player-name">Muffins1337</div>
                 <div className="discovery-settings">
                     <div className="select-settings">
@@ -79,8 +88,9 @@ export default class MyProfile extends Component {
 
         if (files) {
             let fr = new FileReader();
-            fr.onload = function () {
-                console.log("hej");
+            fr.onload = () => {
+                this.setState({selectedImage: fr.result});
+                localStorage.setItem('selectedImage', fr.result);
                 document.getElementById("outImage").src = fr.result;
             };
             fr.readAsDataURL(document.getElementById("selectImage").files[0]);
