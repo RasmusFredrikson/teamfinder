@@ -43,6 +43,7 @@ h1, h2 {
     box-shadow: 2px 5px 5px rgba(0,0,0,0.01);
     cursor: pointer;
     border-radius: 25px;
+    width: 90%;
 }
 
 .card-content {
@@ -86,13 +87,6 @@ h1, h2 {
 
 .animate {
     transition: transform .3s;
-    /*box-shadow: none;*/
-    width: 90%;
-}
-
-.inactive {
-    /*box-shadow: none;*/
-    width: 90%;
 }
 
 .alert {
