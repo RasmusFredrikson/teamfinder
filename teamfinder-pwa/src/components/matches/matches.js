@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import './matches.css';
 
 
-const MatchedPlayer = ({matchedPlayer}) => {
+const MatchedPlayer = ({matchedPlayer, onClick}) => {
     if (!matchedPlayer) {
         return <div></div>;
     }
+
     return (
-        <div className="matchedPlayer">
+        <div className="matchedPlayer" onClick={() => onClick(matchedPlayer)}>
             <img alt={matchedPlayer.image} src={`img/${matchedPlayer.image}`}/>
             <div className="playerInfo">
                 <div className="playerName">{matchedPlayer.name}</div>
@@ -21,18 +22,36 @@ const MatchedPlayer = ({matchedPlayer}) => {
 export default class Matches extends Component {
     state = {
         matchedPlayers: JSON.parse(localStorage.getItem('matchedPlayers')) || "",
+        playerDetails: null,
     };
 
     render() {
+        console.log(this.state.playerDetails);
         return (
-            <div>
-                <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 1]}/>
-                <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 2]}/>
-                <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 3]}/>
-                <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 4]}/>
-                <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 5]}/>
-                <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 6]}/>
-            </div>
+            !this.state.playerDetails ?
+                <div>
+                    <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 1]} onClick={(matchedPlayer) => this.setState({playerDetails: matchedPlayer})}/>
+                    <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 2]} onClick={(matchedPlayer) => this.setState({playerDetails: matchedPlayer})}/>
+                    <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 3]} onClick={(matchedPlayer) => this.setState({playerDetails: matchedPlayer})}/>
+                    <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 4]} onClick={(matchedPlayer) => this.setState({playerDetails: matchedPlayer})}/>
+                    <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 5]} onClick={(matchedPlayer) => this.setState({playerDetails: matchedPlayer})}/>
+                    <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 6]} onClick={(matchedPlayer) => this.setState({playerDetails: matchedPlayer})}/>
+                </div>
+                :
+                <div>
+                    <div className="header">
+                        <img src="img/back-arrow.png" onClick={() => this.setState({playerDetails: null})}/>
+                        <div className="headerText">Matched Player</div>
+                    </div>
+                    <div className="player-details">
+                        <img alt={this.state.playerDetails.image} src={`img/${this.state.playerDetails.image}`}/>
+                        <div className="player-info">
+                            <h1>{this.state.playerDetails.name}, Rank {this.state.playerDetails.rank}</h1>
+                            <h2>Position: {this.state.playerDetails.position}</h2>
+                            <p>{this.state.playerDetails.info}</p>
+                        </div>
+                    </div>
+                </div>
         )
     }
 }
