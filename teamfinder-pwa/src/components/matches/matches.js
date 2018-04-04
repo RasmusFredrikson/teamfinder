@@ -21,7 +21,7 @@ const MatchedPlayer = ({matchedPlayer, onClick}) => {
 
 export default class Matches extends Component {
     state = {
-        matchedPlayers: JSON.parse(localStorage.getItem('matchedPlayers')).reverse() || "",
+        matchedPlayers: localStorage.getItem('matchedPlayers') ? JSON.parse(localStorage.getItem('matchedPlayers')).reverse() : "",
         playerDetails: null,
     };
 
@@ -42,7 +42,7 @@ export default class Matches extends Component {
                             )
                         }
                     </div>
-                    <div className="placeHolder">&nbsp</div>
+                    <div className="placeHolder">&nbsp;</div>
                 </div>
                 :
                 <div>
