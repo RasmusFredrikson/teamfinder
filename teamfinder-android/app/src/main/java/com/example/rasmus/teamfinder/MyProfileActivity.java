@@ -108,15 +108,17 @@ public class MyProfileActivity extends Activity {
         switch(requestCode) {
             case 123:
                 Bitmap bitmap = ImagePicker.getImageFromResult(this, resultCode, data);
-                profilePicture.setImageBitmap(bitmap);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos); //bm is the bitmap object
-                byte[] b = baos.toByteArray();
-                String encoded = Base64.encodeToString(b, Base64.DEFAULT);
+                if (bitmap != null) {
+                    profilePicture.setImageBitmap(bitmap);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos); //bm is the bitmap object
+                    byte[] b = baos.toByteArray();
+                    String encoded = Base64.encodeToString(b, Base64.DEFAULT);
 
-                SharedPreferences.Editor editor = getSharedPreferences(MY_DISCOVERY_SETTINGS, MODE_PRIVATE).edit();
-                editor.putString("selectedImage", encoded);
-                editor.apply();
+                    SharedPreferences.Editor editor = getSharedPreferences(MY_DISCOVERY_SETTINGS, MODE_PRIVATE).edit();
+                    editor.putString("selectedImage", encoded);
+                    editor.apply();
+                }
                 break;
             default:
                 super.onActivityResult(requestCode, resultCode, data);
