@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Image, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View} from "react-native";
+import {Button, Image, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View} from "react-native";
 import * as AsyncStorage from "react-native/Libraries/Storage/AsyncStorage";
 import {withNavigationFocus} from "react-navigation-is-focused-hoc";
 import PropTypes from 'prop-types';
@@ -38,7 +38,7 @@ class Matches extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (!this.props.isFocused && nextProps.isFocused) {
-            AsyncStorage.getItem('matchedPlayers').then((value) => this.setState({matchedPlayers: JSON.parse(value)}));
+            AsyncStorage.getItem('matchedPlayers').then((value) => this.setState({matchedPlayers: JSON.parse(value).reverse()}));
         }
     }
 
@@ -48,17 +48,20 @@ class Matches extends Component {
         }
 
         if(!this.state.matchedPlayers)
-            return <View><Text>You have no matches so far :( </Text></View>
+            return <View><Text>You have no matches so far :( </Text></View>;
 
         return (
-            <View style={styles.container}>
-                <MatchedPlayer props={this.props} matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 1]}/>
-                <MatchedPlayer props={this.props} matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 2]}/>
-                <MatchedPlayer props={this.props} matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 3]}/>
-                <MatchedPlayer props={this.props} matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 4]}/>
-                <MatchedPlayer props={this.props} matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 5]}/>
-                <MatchedPlayer props={this.props} matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 6]}/>
-            </View>
+            <ScrollView style={styles.container}>
+                {
+                    this.state.matchedPlayers.map((matchedPlayer, index) =>
+                        <MatchedPlayer
+                            matchedPlayer={matchedPlayer}
+                            props={this.props}
+                            key={index}
+                        />
+                    )
+                }
+            </ScrollView>
         )
     }
 }
@@ -66,38 +69,42 @@ class Matches extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         paddingLeft: 20,
-        marginTop: 10,
+        backgroundColor: '#ffffff'
     },
     playerInfo: {
-        paddingTop: 15,
+        paddingTop: 18,
         flexWrap: 'wrap',
         alignItems: 'flex-start',
         flexDirection:'row',
     },
     text: {
         width: 90,
-        paddingLeft: 30,
+        paddingLeft: 0,
         color: 'black',
         fontSize: 16,
     },
     name: {
-        width: 90,
+        width: 100,
         paddingLeft: 30,
+        paddingRight: 10,
         fontWeight: 'bold',
         color: 'black',
         fontSize: 16,
     },
     matchedPlayer: {
-        marginTop: 35,
-        paddingBottom: 15,
+        marginTop: 25,
+        paddingBottom: 25,
         flexWrap: 'wrap',
         alignItems: 'flex-start',
         flexDirection:'row',
+        borderBottomColor: '#DDDDDD',
+        borderBottomWidth: 1,
     },
     playerImage: {
-        maxHeight: 50,
-        width: 90,
+        maxHeight: 60,
+        width: 100,
     }
 });
 

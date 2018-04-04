@@ -4,7 +4,7 @@ import './matches.css';
 
 const MatchedPlayer = ({matchedPlayer, onClick}) => {
     if (!matchedPlayer) {
-        return <div></div>;
+        return null;
     }
 
     return (
@@ -30,7 +30,7 @@ export default class Matches extends Component {
             return null;
         return (
             !this.state.playerDetails ?
-                <div className="">
+                <div>
                     <div>
                         {
                             this.state.matchedPlayers.map((matchedPlayer, index) =>
