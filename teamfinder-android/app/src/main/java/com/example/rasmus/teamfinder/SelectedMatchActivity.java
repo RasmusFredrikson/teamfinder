@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import static com.example.rasmus.teamfinder.MyProfileActivity.MY_DISCOVERY_SETTINGS;
 
 public class SelectedMatchActivity extends AppCompatActivity {
-    
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 

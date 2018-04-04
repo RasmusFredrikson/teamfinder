@@ -58,7 +58,7 @@ class Discovery extends Component {
                     cardIndex={this.state.cardIndex}
                     cardVerticalMargin={40}
                     cardHorizontalMargin={13}
-                    verticalSwipe={false}
+                    verticalSwipe={true}
                     swipeAnimationDuration={200}
                     renderCard={this.renderCard}
                     backgroundColor={'#FFFFFF'}
