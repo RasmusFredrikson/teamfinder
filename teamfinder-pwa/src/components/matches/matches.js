@@ -21,21 +21,28 @@ const MatchedPlayer = ({matchedPlayer, onClick}) => {
 
 export default class Matches extends Component {
     state = {
-        matchedPlayers: JSON.parse(localStorage.getItem('matchedPlayers')) || "",
+        matchedPlayers: JSON.parse(localStorage.getItem('matchedPlayers')).reverse() || "",
         playerDetails: null,
     };
 
     render() {
-        console.log(this.state.playerDetails);
+        if (!this.state.matchedPlayers)
+            return null;
         return (
             !this.state.playerDetails ?
-                <div>
-                    <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 1]} onClick={(matchedPlayer) => this.setState({playerDetails: matchedPlayer})}/>
-                    <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 2]} onClick={(matchedPlayer) => this.setState({playerDetails: matchedPlayer})}/>
-                    <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 3]} onClick={(matchedPlayer) => this.setState({playerDetails: matchedPlayer})}/>
-                    <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 4]} onClick={(matchedPlayer) => this.setState({playerDetails: matchedPlayer})}/>
-                    <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 5]} onClick={(matchedPlayer) => this.setState({playerDetails: matchedPlayer})}/>
-                    <MatchedPlayer matchedPlayer={this.state.matchedPlayers[this.state.matchedPlayers.length - 6]} onClick={(matchedPlayer) => this.setState({playerDetails: matchedPlayer})}/>
+                <div className="">
+                    <div>
+                        {
+                            this.state.matchedPlayers.map((matchedPlayer, index) =>
+                                <MatchedPlayer
+                                    matchedPlayer={matchedPlayer}
+                                    onClick={(matchedPlayer) => this.setState({playerDetails: matchedPlayer})}
+                                    key={index}
+                                />
+                            )
+                        }
+                    </div>
+                    <div className="placeHolder">&nbsp</div>
                 </div>
                 :
                 <div>

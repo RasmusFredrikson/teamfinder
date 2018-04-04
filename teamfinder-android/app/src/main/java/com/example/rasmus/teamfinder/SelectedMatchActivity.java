@@ -51,7 +51,7 @@ public class SelectedMatchActivity extends AppCompatActivity {
         ArrayList<Player> matchedPlayers = gson.fromJson(json, new TypeToken<ArrayList<Player>>(){}.getType());
         int playerIndex = 0;
         if (getIntent().getExtras() != null)
-            playerIndex = getIntent().getExtras().getInt("PLAYER_INDEX");
+            playerIndex = matchedPlayers.size() - 1 - getIntent().getExtras().getInt("PLAYER_INDEX");
 
         TextView selectedPlayerName = findViewById(R.id.selectedPlayerName);
         TextView selectedPlayerPosition = findViewById(R.id.selectedPlayerPosition);
