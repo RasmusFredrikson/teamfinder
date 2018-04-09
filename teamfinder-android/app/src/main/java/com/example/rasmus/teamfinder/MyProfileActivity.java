@@ -25,7 +25,7 @@ import java.io.ByteArrayOutputStream;
 public class MyProfileActivity extends Activity {
 
     public static final String MY_DISCOVERY_SETTINGS = "MY_DISCOVERY_SETTINGS";
-    ImageView profilePicture, editNickNameIcon, saveNickNameIcon;
+    ImageView profilePicture, saveNickNameIcon;
     Spinner gameDropdown, positionDropdown, rankDropdown;
     TextView nickName;
     EditText editNickName;
@@ -69,7 +69,9 @@ public class MyProfileActivity extends Activity {
         nickName.setVisibility(View.INVISIBLE);
         saveNickNameIcon.setVisibility(View.VISIBLE);
         editNickName.setVisibility(View.VISIBLE);
-        editNickNameIcon.setVisibility(View.INVISIBLE);
+        editNickName.setSelection(editNickName.getText().length());
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(editNickName, 0);
     }
 
     public void saveNickName() {
@@ -77,7 +79,6 @@ public class MyProfileActivity extends Activity {
         nickName.setVisibility(View.VISIBLE);
         saveNickNameIcon.setVisibility(View.INVISIBLE);
         editNickName.setVisibility(View.INVISIBLE);
-        editNickNameIcon.setVisibility(View.VISIBLE);
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(editNickName.getWindowToken(), 0);
         SharedPreferences.Editor editor = getSharedPreferences(MY_DISCOVERY_SETTINGS, MODE_PRIVATE).edit();
@@ -108,6 +109,12 @@ public class MyProfileActivity extends Activity {
         rankDropdown.setAdapter(rankAdapter);
 
         nickName = findViewById(R.id.nickName);
+        nickName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editNickName();
+            }
+        });
         saveNickNameIcon = findViewById(R.id.saveNickNameIcon);
         saveNickNameIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,13 +123,6 @@ public class MyProfileActivity extends Activity {
             }
         });
         editNickName = findViewById(R.id.editNickName);
-        editNickNameIcon = findViewById(R.id.editNickNameIcon);
-        editNickNameIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editNickName();
-            }
-        });
 
         profilePicture = findViewById(R.id.profilePicture);
         profilePicture.setOnClickListener(new View.OnClickListener() {

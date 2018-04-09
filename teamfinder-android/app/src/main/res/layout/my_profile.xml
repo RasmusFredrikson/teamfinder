@@ -67,25 +67,11 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent" />
 
-                <ImageView
-                    android:id="@+id/editNickNameIcon"
-                    android:layout_width="18dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="11dp"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_toEndOf="@+id/nickName"
-                    android:layout_toRightOf="@+id/nickName"
-                    android:gravity="end"
-                    android:src="@drawable/edit"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="@+id/nickName" />
 
                 <ImageView
                     android:id="@+id/saveNickNameIcon"
-                    android:layout_width="16dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="11dp"
                     android:layout_marginStart="11dp"

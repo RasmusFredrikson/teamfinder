@@ -45,12 +45,11 @@ export default class MyProfile extends Component {
                 <img alt="Profile" src={this.state.selectedImage} id="outImage" onClick={this.clickSelectImage}/>
                 {!this.state.editing ?
                     <div className={"nickNameContainer"}>
-                        <div className="player-name">{this.state.nickName}</div>
-                        <img src={"img/edit.png"} className={"editNickNameIcon"} onClick={() => this.editNickName()}/>
+                        <div className="player-name" onClick={() => this.editNickName()}>{this.state.nickName}</div>
                     </div>
                     :
                     <div className={"nickNameContainer"}>
-                        <span id="saveNickName" contentEditable="true" maxLength={13} className={"player-name"} onChange={(event) => this.setState({ nickName: event.target.value })}>{this.state.nickName}</span>
+                        <span id="saveNickName" contentEditable="true" className={"player-name"} onChange={(event) => this.setState({ nickName: event.target.value })}>{this.state.nickName}</span>
                         <img src={"img/checkmark.png"} className={"saveNickNameIcon"} onClick={() => this.saveNickName()}/>
                     </div>
                 }
@@ -97,10 +96,20 @@ export default class MyProfile extends Component {
 
     editNickName = () => {
         this.setState({editing: true});
+        setTimeout(() => {
+            let node = document.getElementById("saveNickName");
+            node.focus();
+            let range = document.createRange();
+            range.setStart(node.childNodes[0], node.childNodes[0].length);
+            let sel = window.getSelection();
+            range.collapse(true);
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }, 0);
     };
 
     saveNickName = () => {
-        let value = document.getElementById("saveNickName").innerHTML.replace("&nbsp;", "");
+        let value = document.getElementById("saveNickName").innerHTML.substr(0,13).replace(new RegExp("<br>.*|&nbsp;"), "");
         this.setState({editing: false, nickName: value});
         localStorage.setItem('nickName', value);
     };

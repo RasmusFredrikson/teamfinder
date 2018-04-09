@@ -4,14 +4,18 @@ import ImagePicker from "react-native-image-picker";
 import * as AsyncStorage from "react-native/Libraries/Storage/AsyncStorage";
 
 export default class MyProfile extends Component {
-    state = {
-        selectedGame: "",
-        selectedPosition: "",
-        selectedRank: "",
-        playerImage: require("../../img/annie.jpeg"),
-        editing: false,
-        nickName: "Muffins1337"
-    };
+    constructor(props) {
+        super(props);
+        this.nickName = React.createRef();
+        this.state = {
+            selectedGame: "",
+            selectedPosition: "",
+            selectedRank: "",
+            playerImage: require("../../img/annie.jpeg"),
+            editing: false,
+            nickName: "Muffins1337"
+        };
+    }
 
     componentDidMount = () => {
         AsyncStorage.getItem('selectedGame').then((value) => this.setState({'selectedGame': value}));
@@ -46,14 +50,13 @@ export default class MyProfile extends Component {
                 </TouchableHighlight>
                 {!this.state.editing ?
                     <View style={styles.nickNameContainer}>
-                        <Text style = {styles.nickName}>{this.state.nickName}</Text>
                         <TouchableHighlight underlayColor={'#FFFFFF'} onPress={() => this.editNickName()}>
-                            <Image source={require("../../img/edit.png")} style={styles.editNickNameIcon}/>
+                            <Text style = {styles.nickName}>{this.state.nickName}</Text>
                         </TouchableHighlight>
                     </View>
                     :
                     <View style={styles.nickNameContainer}>
-                        <TextInput maxLength={13} style={styles.editNickName} onChangeText={(value) => this.setState({ nickName: value })}>{this.state.nickName}</TextInput>
+                        <TextInput ref={(e) => this.nickName = e} maxLength={13} style={styles.editNickName} onChangeText={(value) => this.setState({ nickName: value })}>{this.state.nickName}</TextInput>
                         <TouchableHighlight underlayColor={'#FFFFFF'} onPress={() => this.saveNickName()}>
                             <Image source={require("../../img/checkmark.png")} style={styles.saveNickNameIcon}/>
                         </TouchableHighlight>
@@ -100,6 +103,9 @@ export default class MyProfile extends Component {
 
     editNickName = () => {
         this.setState({editing: true});
+        setTimeout(() => {
+                this.nickName.focus();
+            }, 0);
     };
 
     saveNickName = () => {
