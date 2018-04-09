@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Image, Picker, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import {Button, Image, Picker, StyleSheet, Text, TextInput, TouchableHighlight, View} from 'react-native';
 import ImagePicker from "react-native-image-picker";
 import * as AsyncStorage from "react-native/Libraries/Storage/AsyncStorage";
 
@@ -8,7 +8,9 @@ export default class MyProfile extends Component {
         selectedGame: "",
         selectedPosition: "",
         selectedRank: "",
-        playerImage: require("../../img/annie.jpeg")
+        playerImage: require("../../img/annie.jpeg"),
+        editing: false,
+        nickName: "Muffins1337"
     };
 
     componentDidMount = () => {
@@ -39,10 +41,24 @@ export default class MyProfile extends Component {
     render() {
         return (
             <View style={styles.parentView}>
-                <TouchableHighlight onPress={() => this.setSelectedImage()}>
+                <TouchableHighlight underlayColor={'#FFFFFF'} onPress={() => this.setSelectedImage()}>
                     <Image source={this.state.playerImage} style={styles.playerImage}/>
                 </TouchableHighlight>
-                <Text style={styles.playerName}>Muffins1337</Text>
+                {!this.state.editing ?
+                    <View style={styles.nickNameContainer}>
+                        <Text style = {styles.nickName}>{this.state.nickName}</Text>
+                        <TouchableHighlight underlayColor={'#FFFFFF'} onPress={() => this.editNickName()}>
+                            <Image source={require("../../img/edit.png")} style={styles.editNickNameIcon}/>
+                        </TouchableHighlight>
+                    </View>
+                    :
+                    <View style={styles.nickNameContainer}>
+                        <TextInput maxLength={13} style={styles.editNickName} onChangeText={(value) => this.setState({ nickName: value })}>{this.state.nickName}</TextInput>
+                        <TouchableHighlight underlayColor={'#FFFFFF'} onPress={() => this.saveNickName()}>
+                            <Image source={require("../../img/checkmark.png")} style={styles.saveNickNameIcon}/>
+                        </TouchableHighlight>
+                    </View>
+                }
                 <View style={styles.discoverySettings}>
                     <Text style={styles.discoverySettingsHeader}>Discovery settings</Text>
                     <Text>Game</Text>
@@ -81,6 +97,15 @@ export default class MyProfile extends Component {
             </View>
         )
     }
+
+    editNickName = () => {
+        this.setState({editing: true});
+    };
+
+    saveNickName = () => {
+        this.setState({editing: false});
+        AsyncStorage.setItem('nickName', this.state.nickName);
+    };
 
     setSelectedImage = () => {
         let options = {
@@ -131,9 +156,34 @@ const styles = StyleSheet.create({
         marginTop: 80,
         maxHeight: 300
     },
-    playerName: {
+    nickNameContainer: {
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+        flexDirection:'row',
+    },
+    nickName: {
         marginTop: 20,
         fontSize: 24,
+        color: '#000',
+        marginBottom: 10,
+    },
+    editNickName: {
+        marginTop: 10,
+        fontSize: 24,
+    },
+    editNickNameIcon: {
+        marginTop: 28,
+        marginLeft: 10,
+        height: 18,
+        width: 20,
+        resizeMode: 'contain',
+    },
+    saveNickNameIcon: {
+        marginTop: 22,
+        marginLeft: 5,
+        height: 25,
+        maxWidth: 25,
+        resizeMode: 'contain',
     },
     pickerWrapper: {
         backgroundColor: '#DDDDDD',

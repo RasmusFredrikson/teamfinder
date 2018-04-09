@@ -10,7 +10,9 @@ export default class MyProfile extends Component {
             selectedImage: localStorage.getItem('selectedImage') || "img/annie.jpeg",
             selectedGame: localStorage.getItem('selectedGame') || "",
             selectedPosition: localStorage.getItem('selectedPosition') || "",
-            selectedRank: localStorage.getItem('selectedRank') || ""
+            selectedRank: localStorage.getItem('selectedRank') || "",
+            nickName: localStorage.getItem('nickName') || "Muffins1337",
+            editing: false
         };
 
         this.setSelectedImage = this.setSelectedImage.bind(this);
@@ -41,7 +43,17 @@ export default class MyProfile extends Component {
             <div>
                 <input type="file" accept="image/*" id="selectImage" onChange={this.setSelectedImage}/>
                 <img alt="Profile" src={this.state.selectedImage} id="outImage" onClick={this.clickSelectImage}/>
-                <div className="player-name">Muffins1337</div>
+                {!this.state.editing ?
+                    <div className={"nickNameContainer"}>
+                        <div className="player-name">{this.state.nickName}</div>
+                        <img src={"img/edit.png"} className={"editNickNameIcon"} onClick={() => this.editNickName()}/>
+                    </div>
+                    :
+                    <div className={"nickNameContainer"}>
+                        <span id="saveNickName" contentEditable="true" maxLength={13} className={"player-name"} onChange={(event) => this.setState({ nickName: event.target.value })}>{this.state.nickName}</span>
+                        <img src={"img/checkmark.png"} className={"saveNickNameIcon"} onClick={() => this.saveNickName()}/>
+                    </div>
+                }
                 <div className="discovery-settings">
                     <div className="select-settings">
                         <p>Discovery settings</p>
@@ -81,6 +93,16 @@ export default class MyProfile extends Component {
 
     clickSelectImage = () => {
         document.getElementById("selectImage").click();
+    };
+
+    editNickName = () => {
+        this.setState({editing: true});
+    };
+
+    saveNickName = () => {
+        let value = document.getElementById("saveNickName").innerHTML.replace("&nbsp;", "");
+        this.setState({editing: false, nickName: value});
+        localStorage.setItem('nickName', value);
     };
 
     setSelectedImage = () => {

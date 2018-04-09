@@ -31,22 +31,79 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/nickName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/nickname"
-                android:textSize="24sp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profilePicture" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="16dp"
+                >
+
+                <EditText
+                    android:id="@+id/editNickName"
+                    android:maxWidth="200dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/nickName"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignStart="@+id/nickName"
+                    android:background="@android:color/transparent"
+                    android:inputType="text"
+                    android:text="@string/nickname"
+                    android:textSize="24sp"
+                    android:visibility="invisible"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:maxLength="13"
+                    />
+
+                <TextView
+                    android:id="@+id/nickName"
+                    android:layout_width="wrap_content"
+                    android:maxWidth="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/nickname"
+                    android:textColor="@android:color/black"
+                    android:textSize="24sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <ImageView
+                    android:id="@+id/editNickNameIcon"
+                    android:layout_width="18dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@+id/nickName"
+                    android:layout_toRightOf="@+id/nickName"
+                    android:gravity="end"
+                    android:src="@drawable/edit"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="@+id/nickName" />
+
+                <ImageView
+                    android:id="@+id/saveNickNameIcon"
+                    android:layout_width="16dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@+id/editNickName"
+                    android:layout_toRightOf="@+id/editNickName"
+                    android:gravity="end"
+                    android:src="@drawable/checkmark"
+                    android:visibility="invisible"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="@+id/editNickName" />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:gravity="start"
                 android:text="@string/title_discovery_settings"
                 android:textAlignment="viewStart"
@@ -125,6 +182,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/positionLabel" />
+
         </LinearLayout>
     </ScrollView>
 

@@ -1,6 +1,7 @@
 package com.example.rasmus.teamfinder;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -11,17 +12,23 @@ import android.support.design.widget.BottomNavigationView;
 import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 
 public class MyProfileActivity extends Activity {
 
     public static final String MY_DISCOVERY_SETTINGS = "MY_DISCOVERY_SETTINGS";
-    ImageView profilePicture;
+    ImageView profilePicture, editNickNameIcon, saveNickNameIcon;
     Spinner gameDropdown, positionDropdown, rankDropdown;
+    TextView nickName;
+    EditText editNickName;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -58,6 +65,26 @@ public class MyProfileActivity extends Activity {
         editor.apply();
     }
 
+    public void editNickName() {
+        nickName.setVisibility(View.INVISIBLE);
+        saveNickNameIcon.setVisibility(View.VISIBLE);
+        editNickName.setVisibility(View.VISIBLE);
+        editNickNameIcon.setVisibility(View.INVISIBLE);
+    }
+
+    public void saveNickName() {
+        nickName.setText(editNickName.getText());
+        nickName.setVisibility(View.VISIBLE);
+        saveNickNameIcon.setVisibility(View.INVISIBLE);
+        editNickName.setVisibility(View.INVISIBLE);
+        editNickNameIcon.setVisibility(View.VISIBLE);
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editNickName.getWindowToken(), 0);
+        SharedPreferences.Editor editor = getSharedPreferences(MY_DISCOVERY_SETTINGS, MODE_PRIVATE).edit();
+        editor.putString("nickName", editNickName.getText().toString());
+        editor.apply();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +107,23 @@ public class MyProfileActivity extends Activity {
         ArrayAdapter<String> rankAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.dropdown_ranks));
         rankDropdown.setAdapter(rankAdapter);
 
+        nickName = findViewById(R.id.nickName);
+        saveNickNameIcon = findViewById(R.id.saveNickNameIcon);
+        saveNickNameIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveNickName();
+            }
+        });
+        editNickName = findViewById(R.id.editNickName);
+        editNickNameIcon = findViewById(R.id.editNickNameIcon);
+        editNickNameIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editNickName();
+            }
+        });
+
         profilePicture = findViewById(R.id.profilePicture);
         profilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +138,8 @@ public class MyProfileActivity extends Activity {
             gameDropdown.setSelection(prefs.getInt("gameIndex",0));
             positionDropdown.setSelection(prefs.getInt("positionIndex",0));
             rankDropdown.setSelection(prefs.getInt("rankIndex",0));
+            nickName.setText(prefs.getString("nickName", "Muffins1337"));
+            editNickName.setText(prefs.getString("nickName", "Muffins1337"));
 
             if (prefs.getString("selectedImage", null) != null) {
                 byte[] imageAsBytes = Base64.decode(prefs.getString("selectedImage", null).getBytes(), Base64.DEFAULT);
