@@ -56,7 +56,7 @@ export default class MyProfile extends Component {
                     </View>
                     :
                     <View style={styles.nickNameContainer}>
-                        <TextInput ref={(e) => this.nickName = e} maxLength={13} style={styles.editNickName} onChangeText={(value) => this.setState({ nickName: value })}>{this.state.nickName}</TextInput>
+                        <TextInput underlineColorAndroid={'transparent'} ref={(e) => this.nickName = e} maxLength={13} style={styles.editNickName} onChangeText={(value) => this.setState({ nickName: value })}>{this.state.nickName}</TextInput>
                         <TouchableHighlight underlayColor={'#FFFFFF'} onPress={() => this.saveNickName()}>
                             <Image source={require("../../img/checkmark.png")} style={styles.saveNickNameIcon}/>
                         </TouchableHighlight>

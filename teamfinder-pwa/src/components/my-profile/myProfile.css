@@ -23,20 +23,21 @@
     border-bottom: solid 1px black;
 }
 
+#saveNickName:focus {
+    border: 0;
+    border-bottom: solid 1px black;
+    outline-width: 0;
+}
+
 .discovery-settings {
     margin-top: 25px;
 }
 
 .saveNickNameIcon {
-    height: 20px;
+    height: 25px;
     max-width: 25px;
     display: inline-block;
-}
-
-.editNickNameIcon {
-    height: 20px;
-    max-width: 25px;
-    display: inline-block;
+    padding-bottom: 2px;
 }
 
 .select-settings {
