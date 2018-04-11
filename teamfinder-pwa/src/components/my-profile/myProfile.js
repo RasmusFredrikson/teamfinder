@@ -57,7 +57,7 @@ export default class MyProfile extends Component {
                     <div className="select-settings">
                         <p>Discovery settings</p>
                         <label htmlFor="game-select">Game</label>
-                        <select id="game-select" value={this.state.selectedGame} onChange={(item) => this.saveSelection(item)}>
+                        <select id="game-select" value={this.state.selectedGame} onChange={() => this.saveSelection("game")}>
                             <option value="">Select a game...</option>
                             <option value="lol">League of Legends</option>
                             <option value="csgo">Counter Strike: Global Offensive</option>
