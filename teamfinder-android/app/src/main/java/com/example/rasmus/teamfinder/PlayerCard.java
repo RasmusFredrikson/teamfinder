@@ -71,7 +71,6 @@ public class PlayerCard {
     @Resolve
     private void onResolved(){
         MultiTransformation multi = new MultiTransformation(
-                new BlurTransformation(mContext, 30),
                 new RoundedCornersTransformation(
                         mContext, Utils.dpToPx(7), 0,
                         RoundedCornersTransformation.CornerType.TOP));

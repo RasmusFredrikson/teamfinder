@@ -11,7 +11,7 @@ export default class MyProfile extends Component {
             selectedGame: "",
             selectedPosition: "",
             selectedRank: "",
-            playerImage: require("../../img/annie.jpeg"),
+            playerImage: require("../../img/poros.jpeg"),
             editing: false,
             nickName: "Muffins1337"
         };

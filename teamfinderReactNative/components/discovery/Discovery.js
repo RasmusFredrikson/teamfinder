@@ -132,9 +132,16 @@ class Discovery extends Component {
             "I just started playing games and don't really like it that much..."
         ];
         let playerImages = [
-            require("../../img/amumu.jpeg"), require("../../img/ashe.jpeg"), require("../../img/darius.jpeg"), require("../../img/jinx.jpeg"), require("../../img/lux.jpeg"),
-            require("../../img/teemo.jpeg"), require("../../img/volibear.jpeg"), require("../../img/annie.jpeg"), require("../../img/braum.jpeg"), require("../../img/karthus.jpg"),
-            require("../../img/katarina.jpeg"), require("../../img/poros.jpeg")
+            require("../../img/aatrox.jpeg"), require("../../img/ahri.jpg"), require("../../img/akali.jpg"), require("../../img/alistar.jpg"),
+            require("../../img/amumu.jpeg"), require("../../img/anivia.jpg"), require("../../img/annie.jpeg"), require("../../img/ashe.jpeg"),
+            require("../../img/azir.jpg"), require("../../img/bard.jpg"), require("../../img/blitzcrank.jpg"), require("../../img/brand.jpg"),
+            require("../../img/braum.jpeg"), require("../../img/caitlyn.jpg"), require("../../img/camille.jpg"), require("../../img/cassiopeia.jpg"),
+            require("../../img/chogath.jpg"), require("../../img/corki.jpg"), require("../../img/darius.jpeg"), require("../../img/diana.jpg"),
+            require("../../img/draven.jpg"), require("../../img/drmundo.jpg"), require("../../img/elise.jpg"), require("../../img/evelynn.jpg"),
+            require("../../img/ezreal.jpg"), require("../../img/fiddlesticks.jpg"), require("../../img/jinx.jpeg"), require("../../img/karthus.jpg"),
+            require("../../img/katarina.jpeg"), require("../../img/lux.jpeg"), require("../../img/poros.jpeg"), require("../../img/teemo.jpeg"),
+            require("../../img/volibear.jpeg")
+
         ];
 
         for (let i = 0; i < 20; i++) {

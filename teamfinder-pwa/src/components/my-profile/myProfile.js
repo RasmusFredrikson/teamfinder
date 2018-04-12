@@ -7,7 +7,7 @@ export default class MyProfile extends Component {
         super(props);
 
         this.state = {
-            selectedImage: localStorage.getItem('selectedImage') || "img/annie.jpeg",
+            selectedImage: localStorage.getItem('selectedImage') || "img/poros.jpeg",
             selectedGame: localStorage.getItem('selectedGame') || "",
             selectedPosition: localStorage.getItem('selectedPosition') || "",
             selectedRank: localStorage.getItem('selectedRank') || "",

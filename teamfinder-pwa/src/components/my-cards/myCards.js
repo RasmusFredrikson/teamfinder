@@ -47,9 +47,12 @@ function getPlayers() {
         "I just started playing games and don't really like it that much..."
     ];
     let playerImages = [
-        "amumu.jpeg", "ashe.jpeg", "darius.jpeg", "jinx.jpeg", "lux.jpeg",
-        "teemo.jpeg", "volibear.jpeg", "annie.jpeg", "braum.jpeg", "karthus.jpg",
-        "katarina.jpeg", "poros.jpeg"
+        "aatrox.jpeg","ahri.jpg", "akali.jpg", "alistar.jpg", "amumu.jpg", "anivia.jpg",
+        "annie.jpg", "ashe.jpg", "azir.jpg", "bard.jpg", "blitzcrank.jpg", "brand.jpg",
+        "braum.jpg", "caitlyn.jpg", "camille.jpg", "cassiopeia.jpg", "chogath.jpg", "corki.jpg",
+        "darius.jpg", "diana.jpg","draven.jpg","drmundo.jpg","elise.jpg","evelynn.jpg",
+        "ezreal.jpg","fiddlesticks.jpg", "jinx.jpg", "karthus.jpg", "katarina.jpg", "lux.jpg",
+        "poros.jpeg", "teemo.jpg", "volibear.jpg"
     ];
 
     let players = [];

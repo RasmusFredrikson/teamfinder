@@ -34,9 +34,13 @@ public class DiscoverActivity extends Activity {
             "I just started playing games and don't really like it that much..."
     };
     private static final int[] playerImages = {
-            R.drawable.amumu, R.drawable.ashe, R.drawable.darius, R.drawable.jinx, R.drawable.lux,
-            R.drawable.teemo, R.drawable.volibear, R.drawable.annie, R.drawable.braum, R.drawable.karthus,
-            R.drawable.katarina, R.drawable.poros
+            R.drawable.aatrox, R.drawable.ahri, R.drawable.akali, R.drawable.alistar, R.drawable.amumu,
+            R.drawable.anivia, R.drawable.annie, R.drawable.ashe, R.drawable.azir, R.drawable.bard,
+            R.drawable.blitzcrank, R.drawable.brand, R.drawable.braum, R.drawable.caitlyn,
+            R.drawable.camille, R.drawable.cassiopeia, R.drawable.chogath, R.drawable.corki, R.drawable.darius,
+            R.drawable.diana, R.drawable.draven, R.drawable.drmundo, R.drawable.elise, R.drawable.evelynn,
+            R.drawable.ezreal, R.drawable.fiddlesticks, R.drawable.jinx, R.drawable.karthus, R.drawable.katarina,
+            R.drawable.lux, R.drawable.poros, R.drawable.teemo, R.drawable.volibear
     };
 
     private SwipePlaceHolderView mSwipeView;
