@@ -87,7 +87,13 @@ export default class MyCards extends Component {
     };
     onSwipeRight = () => {
         if (randomizeIndex(10) > 5) {
-            navigator.vibrate(300);
+            // enable vibration support
+            navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+
+            if (navigator.vibrate) {
+                // vibration API supported
+                navigator.vibrate(300);
+            }
             this.setState(prevState => ({matched: [...prevState.matched, prevState.players[this.state.turn]]}));
             localStorage.setItem("matchedPlayers", JSON.stringify(this.state.matched));
         }
