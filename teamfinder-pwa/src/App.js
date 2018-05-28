@@ -13,21 +13,18 @@ class App extends Component {
                     <div className="navbar" id="myNavbar">
                         <Link to="/"
                               id="my-profile-link"
-                              onMouseEnter={() => this.switchColorOnFocusIn("my-profile")}
-                            onMouseLeave={() => this.switchColorOnFocusOut("my-profile")}>
-                            <img alt="my-profile" id="my-profile" src="img/my-profile-focus.png"/>My Profile
+                              onMouseEnter={() => this.switchColorOnFocusIn("my-profile")}>
+                            <img alt="my-profile" id="my-profile" src={require("./img/my-profile-focus.png")}/>My Profile
                         </Link>
                         <Link to="/discovery"
                               id="discovery-link"
-                              onMouseEnter={() => this.switchColorOnFocusIn("discovery")}
-                            onMouseLeave={() => this.switchColorOnFocusOut("discovery")}>
-                            <img alt="discovery" id="discovery" src="img/discovery.png"/>Discover
+                              onMouseEnter={() => this.switchColorOnFocusIn("discovery")}>
+                            <img alt="discovery" id="discovery" src={require("./img/discovery.png")}/>Discover
                         </Link>
                         <Link to="/matches"
                               id="matches-link"
-                              onMouseEnter={() => this.switchColorOnFocusIn("matches")}
-                              onMouseLeave={() => this.switchColorOnFocusOut("matches")}>
-                            <img alt="matches" id="matches" src="img/matches.png"/>Matches
+                              onMouseEnter={() => this.switchColorOnFocusIn("matches")}>
+                            <img alt="matches" id="matches" src={require("./img/matches.png")}/>Matches
                         </Link>
                     </div>
                     <Route exact path="/" component={MyProfile} />
@@ -39,14 +36,16 @@ class App extends Component {
     }
 
     switchColorOnFocusIn(element) {
+        this.switchColorOnFocusOut("matches");
+        this.switchColorOnFocusOut("discovery");
         this.switchColorOnFocusOut("my-profile");
-        document.getElementById(element).setAttribute('src', `img/${element}-focus.png`);
+        document.getElementById(element).setAttribute('src', require(`./img/${element}-focus.png`));
         document.getElementById(`${element}-link`).style.color = '#8B0000';
         document.getElementById(`${element}-link`).style.fontSize = '14px';
     }
 
     switchColorOnFocusOut(element) {
-        document.getElementById(element).setAttribute('src', `img/${element}.png`);
+        document.getElementById(element).setAttribute('src', require(`./img/${element}.png`));
         document.getElementById(`${element}-link`).style.color = 'grey';
         document.getElementById(`${element}-link`).style.fontSize = '12px';
 

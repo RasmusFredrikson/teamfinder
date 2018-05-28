@@ -9,7 +9,7 @@ const MatchedPlayer = ({matchedPlayer, onClick}) => {
 
     return (
         <div className="matchedPlayer" onClick={() => onClick(matchedPlayer)}>
-            <img alt={matchedPlayer.image} src={`img/${matchedPlayer.image}`}/>
+            <img alt={matchedPlayer.image} src={require(`../../img/${matchedPlayer.image}`)}/>
             <div className="playerInfo">
                 <div className="playerName">{matchedPlayer.name}</div>
                 <div>Rank {matchedPlayer.rank}</div>
@@ -47,11 +47,11 @@ export default class Matches extends Component {
                 :
                 <div>
                     <div className="header">
-                        <img src="img/back-arrow.png" onClick={() => this.setState({playerDetails: null})}/>
+                        <img src={require("../../img/back-arrow.png")} onClick={() => this.setState({playerDetails: null})}/>
                         <div className="headerText">Matched Player</div>
                     </div>
                     <div className="player-details">
-                        <img alt={this.state.playerDetails.image} src={`img/${this.state.playerDetails.image}`}/>
+                        <img alt={this.state.playerDetails.image} src={require(`../../img/${this.state.playerDetails.image}`)}/>
                         <div className="player-info">
                             <h1>{this.state.playerDetails.name}, Rank {this.state.playerDetails.rank}</h1>
                             <h2>Position: {this.state.playerDetails.position}</h2>

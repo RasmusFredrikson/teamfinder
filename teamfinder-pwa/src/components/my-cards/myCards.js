@@ -19,7 +19,7 @@ const Wrapper = ({data: players, onSwipeLeft, onSwipeRight}) => {
                         onSwipeLeft={() => onSwipeLeft(player.name)}
                         onSwipeRight={() => onSwipeRight(player.name)}>
                         <div className="card-content">
-                            <img alt={player.image} src={`img/${player.image}`}/>
+                            <img alt={player.image} src={require(`../../img/${player.image}`)}/>
                             <div className="player-info">
                                 <h1>{player.name}, Rank {player.rank}</h1>
                                 <h2>Position: {player.position}</h2>

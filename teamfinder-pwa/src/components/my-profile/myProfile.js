@@ -7,7 +7,7 @@ export default class MyProfile extends Component {
         super(props);
 
         this.state = {
-            selectedImage: localStorage.getItem('selectedImage') || "img/poros.jpeg",
+            selectedImage: localStorage.getItem('selectedImage') || require("../../img/poros.jpeg"),
             selectedGame: localStorage.getItem('selectedGame') || "",
             selectedPosition: localStorage.getItem('selectedPosition') || "",
             selectedRank: localStorage.getItem('selectedRank') || "",
@@ -50,7 +50,7 @@ export default class MyProfile extends Component {
                     :
                     <div className={"nickNameContainer"}>
                         <span id="saveNickName" contentEditable="true" className={"player-name"} onChange={(event) => this.setState({ nickName: event.target.value })}>{this.state.nickName}</span>
-                        <img src={"img/checkmark.png"} className={"saveNickNameIcon"} onClick={() => this.saveNickName()}/>
+                        <img src={require("../../img/checkmark.png")} className={"saveNickNameIcon"} onClick={() => this.saveNickName()}/>
                     </div>
                 }
                 <div className="discovery-settings">
